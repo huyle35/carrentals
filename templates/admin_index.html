@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}  Trang Admin {% endblock %}
+
+{% block delete_confirm %}
+        <script type="text/javascript">
+         <!--
+            function getConfirmation(){
+               var retVal = confirm("Do you want to Delete ?");
+                if(retVal) return true;
+                else return false;
+            }
+         //-->
+      </script>
+    {% endblock %}
+{% block search %}
+{% endblock %}
+{% block nav %}
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
+        <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
+        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
+          <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
+        <li><a href="{% url 'logout' %}x"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+      </ul>
+    </div>
+
+{% endblock %}
+{% block body %}
+<div class='container table-responsive'>
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Tất Cả Các Xe</strong></h5> </div>
+    <div class="panel-body">
+  <strong class="navbar-form navbar-left" style="color: #5f5f5f;"><span class="glyphicon glyphicon-cog"></span> Tối đa 25 xe/trang </strong>
+
+   <!-- search box-->
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Tìm kiếm xe" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
+      </form>
+
+  <!-- Table -->
+
+  <table class="table table-bordered table-striped table-hover">
+   <tr>
+    <td><strong>Tên Xe</strong></td>
+    <td><strong>Tên Công Ty</strong></td>
+    <td><strong>Số Chỗ</strong></td>
+    <td><strong>Chi Phí / Ngày (VND)</strong></td>
+    <td><strong>Lượt Thích</strong></td>
+    <td><strong>Sửa Đổi</strong></td>
+  </tr>
+      <tbody>
+      {% for ob in car %}
+    <tr>
+    <td>{{ob.car_name}}</td>
+    <td>{{ob.company_name}}</td>
+    <td>{{ob.num_of_seats}}</td>
+    <td>{{ob.cost_par_day}}</td>
+    <td>{{ob.like}}</td>
+    <td>
+         <a href="{% url 'car_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+         <a href="{% url 'car_edit' ob.id %}"><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button></a>
+         <a href="{% url 'car_delete' ob.id %}"><button type="button" class="btn btn-danger" onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
+    </td>
+    </tr>
+    {% endfor %}
+</tbody>
+  </table>
+<nav>
+  <ul class="pager">
+    <li class="previous">{% if car.has_previous %}
+            <a href="?page={{ movie.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Trang trước</a>
+    {% endif %}
+    </li>
+      <li class="previous" style="color: black !important;">
+          Trang {{ car.number }} / {{ car.paginator.num_pages }}.
+    </li>
+    <li class="next">{% if car.has_next %}
+            <a href="?page={{ movie.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
+        Trang sau <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
+  </ul>
+</nav>
+        <hr>
+</div>
+</div>
+</div> <!--end container-->
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %} List Order {% endblock %}
+{% block search %}
+{% endblock %}
+{% block nav %}
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
+        <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
+        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
+          <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
+        <li><a href="{% url 'logout' %}x"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+      </ul>
+    </div>
+
+{% endblock %}
+{% block body %}
+<br>
+<div class='container table-responsive'>
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Các Đơn Đặt Xe</strong> </div>
+    <div class="panel-body">
+    <strong class="navbar-form navbar-left" style="color: #5f5f5f;"><span class="glyphicon glyphicon-cog"></span> Tối đa 4 đơn/trang </strong>
+
+    {% block search_box %}
+    <!-- search box-->
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Tìm kiếm" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
+      </form>
+      {% endblock %}
+
+  <!-- Table -->
+  <table class="table table-bordered table-striped table-hover">
+   <tr>
+     <td><strong>Số Thứ Tự</strong></td>
+   <td><strong>Tên Khách Hàng</strong></td>
+   <td><strong>Số Điện Thoại</strong></td>
+    <td><strong>Tên Xe</strong></td>
+    <td><strong>Từ Ngày</strong></td>
+    <td><strong>Đến Ngày</strong></td>
+    <td><strong>Chỉnh Sửa</strong></td>
+  </tr>
+      {% for ob in order %}
+    <tr>
+    <td>{{ob.id}} ORD</td>
+    <td>{{ob.employee_name}}</td>
+    <td>{{ob.cell_no}}</td>
+    <td>{{ob.car_name}}</td>
+    <td>{{ob.date}}</td>
+    <td>{{ob.to}}</td>
+    <td>
+         <a href="{% url 'order_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+         <a href="{% url 'order_delete' ob.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>
+    </td>
+</tr>
+    {% endfor %}
+  </table>
+<nav>
+  <ul class="pager">
+    <li class="previous">{% if order.has_previous %}
+            <a href="?page={{ order.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Trang trước</a>
+    {% endif %}
+    </li>
+      <li class="previous">
+         <strong> Trang {{ order.number }} / {{ order.paginator.num_pages }}.</strong>
+    </li>
+    <li class="next">{% if order.has_next %}
+            <a href="?page={{ order.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
+        Trang sau <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
+  </ul>
+</nav>
+    <hr>
+    </div>
+    </div>
+{% endblock %}

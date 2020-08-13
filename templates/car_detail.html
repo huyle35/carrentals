@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Chi Tiết Về {{detail.car_name}} {% endblock %}
+
+{% block body %}
+
+{% block search %}
+{% endblock %}
+<br>
+<div class ='col-sm-6 col-sm-offset-3'>
+  <div class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-film"></span> Thông Tin Chi Tiết</strong>
+  </div>
+  {% if detail.image %}
+  <img src='{{ detail.image.url }}' class="img-responsive"/>
+  {% endif %}
+  <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.car_name}}</a>
+  <a href="" class="list-group-item"><strong>Tên Công Ty   : </strong>{{detail.company_name}}</a>
+  <a href="" class="list-group-item"><strong>Số Ghế Ngồi   : </strong>{{detail.num_of_seats}}</a>
+  <a href="" class="list-group-item"><strong>Giá / ngày   : </strong>{{detail.cost_par_day}} VND</a>
+  <a href="" class="list-group-item"><strong>Lượt Thích   : </strong>{{detail.like}}</a>
+  <a href="" class="list-group-item"><strong>Thông Tin Khác   : </strong>{{detail.content}}</a><br>
+  <div class="pull-right">
+    <a href="{% url 'newcar' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-list"></span> Xe Mới Cập Nhật</button></a>
+    <a href="{% url 'order_create' %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-list"></span> Đặt Xe</button></a>
+  <hr>
+  </div>
+</div>
+{% endblock %}
