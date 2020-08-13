@@ -24,7 +24,7 @@ SECRET_KEY = 'v%()u+0&27nyn$&_=g$4tj9_gp-)%-w7g6+xyg@h+m#b%uly6='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["sleepy-bayou-66658.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["still-stream-58342.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -94,10 +94,10 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "da53o9u2oh8d54",
-        "USER": "hyyzigeuebrxpf",
-        "PASSWORD": "b1e3a4b0e63a0fe259c69e1720672194db8d712bd3376590e4e6171abb639742",
-        "HOST": "ec2-54-160-120-28.compute-1.amazonaws.com",
+        "NAME": "d9u15h2shm5irq",
+        "USER": "wrhgiybclscyen",
+        "PASSWORD": "e627eee2bac61aea992e3dc04cc1ee773fba25be2d5b6ee1496220e73eff301a",
+        "HOST": "ec2-50-16-198-4.compute-1.amazonaws.com",
         "PORT": 5432,
     }
 }
