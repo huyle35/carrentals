@@ -370,6 +370,10 @@ Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc c�
       <p><span class="glyphicon glyphicon-phone"></span> +09 38.100.229</p>
       <p><span class="glyphicon glyphicon-envelope"></span> info.hoanggiavn@gmail.com</p>
     </div>
+
+    {% block body %}
+    <form method="POST" action="">
+        {% csrf_token %}
     <div class="col-sm-7 slideanim">
       <div class="row">
         <div class="col-sm-6 form-group">
@@ -381,10 +385,12 @@ Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc c�
       </div>
       <textarea class="form-control" id="comments" name="comments" placeholder="Nội dung" rows="5"></textarea><br>
       <div class="row">
-        <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">Gửi</button>
+        <div class="pull-right">
+            <input type="submit" class="btn btn-primary" value="Gửi"/>
         </div>
       </div>
+      </form>
+    {% endblock %}
     </div>
   </div>
 </div>

@@ -68,34 +68,20 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError("Tài khoản không còn hoạt động. Vui lòng đăng ký tài khoản mới !")
         return super(UserLoginForm,self).clean(*args, **kwargs)
 
-# class UserRegisterForm(forms.ModelForm):
-#     email = forms.EmailField()
-#     username = forms.CharField()
-#     password = forms.CharField(widget=forms.PasswordInput)
-#     confirm_password = forms.CharField(widget=forms.PasswordInput)
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(max_length=254, help_text='Vui lòng nhập Email hợp lệ.')
 
-#     class Meta:
-#         model = User
-#         fields = [
-#             "username",
-#             "email",
-#             "password",
-#             "confirm_password",
-#         ]
-        
-#     def clean(self):
-#         cleaned_data = super(UserRegisterForm, self).clean()
-#         password = cleaned_data.get("password")
-#         confirm_password = cleaned_data.get("confirm_password")
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput)
+    new_password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
 
-#         if password != confirm_password:
-#             self.add_error('confirm_password', "Xác nhận mật khẩu không đúng. Vui lòng nhập lại !")
+    def clean(self):
+        cleaned_data = super(ChangePasswordForm, self).clean()
+        password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
 
-#         return cleaned_data
+        if new_password != confirm_password:
+            self.add_error('confirm_password', "Xác nhận mật khẩu không đúng. Vui lòng nhập lại !")
 
-#     def save(self, commit=True):
-#         user = super(UserRegisterForm, self).save(commit)
-#         user.last_login = timezone.now()
-#         if commit:
-#             user.save()
-#         return user
+        return cleaned_data

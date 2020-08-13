@@ -13,6 +13,13 @@ def home(request):
     }
     return render(request,'home.html', context)
 
+    form = MessageForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect("/car/carlist/")
+    return render(request,'home.html')
+
 def car_list(request):
     car = Car.objects.all()
 
