@@ -20,12 +20,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
-    # url(r'^resetpassword/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'), name='reset_password'),
-    # url(r'^resetpassword/done/', reset_password_done, name='reset_password_done'),
-    path(
-        'changepassword/',
-        auth_views.PasswordChangeView.as_view(template_name='change_password.html'),
-    ),
+    path('', include('django.contrib.auth.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

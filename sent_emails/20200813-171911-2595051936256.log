@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8888
+From: webmaster@localhost
+To: giahuy351998@gmail.com
+Date: Thu, 13 Aug 2020 10:19:11 -0000
+Message-ID: <159731395151.19096.9256168115265446346@antran.nng.bz.local>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8888.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8888/account/reset/MQ/5j0-1849938f27fa9c2e2dc6/
+
+Your username, in case you’ve forgotten: huyle
+
+Thanks for using our site!
+
+The 127.0.0.1:8888 team
+
+
+
+-------------------------------------------------------------------------------

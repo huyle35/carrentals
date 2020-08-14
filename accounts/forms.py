@@ -68,20 +68,20 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError("Tài khoản không còn hoạt động. Vui lòng đăng ký tài khoản mới !")
         return super(UserLoginForm,self).clean(*args, **kwargs)
 
-class ResetPasswordForm(forms.Form):
-    email = forms.EmailField(max_length=254, help_text='Vui lòng nhập Email hợp lệ.')
+# class ResetPasswordForm(forms.Form):
+#     email = forms.EmailField(max_length=254, help_text='Vui lòng nhập Email hợp lệ.')
 
-class ChangePasswordForm(forms.Form):
-    old_password = forms.CharField(widget=forms.PasswordInput)
-    new_password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+# class ChangePasswordForm(forms.Form):
+#     old_password = forms.CharField(widget=forms.PasswordInput)
+#     new_password = forms.CharField(widget=forms.PasswordInput)
+#     confirm_password = forms.CharField(widget=forms.PasswordInput)
 
-    def clean(self):
-        cleaned_data = super(ChangePasswordForm, self).clean()
-        password = cleaned_data.get("new_password")
-        confirm_password = cleaned_data.get("confirm_password")
+#     def clean(self):
+#         cleaned_data = super(ChangePasswordForm, self).clean()
+#         password = cleaned_data.get("new_password")
+#         confirm_password = cleaned_data.get("confirm_password")
 
-        if new_password != confirm_password:
-            self.add_error('confirm_password', "Xác nhận mật khẩu không đúng. Vui lòng nhập lại !")
+#         if new_password != confirm_password:
+#             self.add_error('confirm_password', "Xác nhận mật khẩu không đúng. Vui lòng nhập lại !")
 
-        return cleaned_data
+#         return cleaned_data
