@@ -52,16 +52,5 @@ def logout_view(request):
     logout(request)
     return render(request, "home.html", {})
 
-# def password_change(request):
-#     if request.method == 'POST':
-#         form = PasswordChangeForm(user=request.user, data=request.POST)
-#         if form.is_valid():
-#             form.save()
-#             update_session_auth_hash(request, form.user)
-#     else:
-#         form = PasswordChangeForm()
-#     return render(request, "change_password.html")
 
-# def reset_password_done(request):
-#     return render(request, "password_reset_done.html")
 

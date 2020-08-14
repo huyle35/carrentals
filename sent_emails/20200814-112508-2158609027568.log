@@ -4,15 +4,15 @@ Content-Transfer-Encoding: 8bit
 Subject: Password reset on 127.0.0.1:8888
 From: TestSite Team <noreply@example.com>
 To: giahuy351998@gmail.com
-Date: Thu, 13 Aug 2020 11:07:34 -0000
-Message-ID: <159731685463.12148.8429580742800787947@antran.nng.bz.local>
+Date: Fri, 14 Aug 2020 04:25:08 -0000
+Message-ID: <159737910854.26692.7422435962569264678@antran.nng.bz.local>
 
 
 You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8888.
 
 Please go to the following page and choose a new password:
 
-http://127.0.0.1:8888/reset/MQ/5j0-a7219a0b2d4bc7545f6d/
+http://127.0.0.1:8888/reset/MQ/5j1-b320e4491802d0db62d6/
 
 Your username, in case you’ve forgotten: huyle
 
