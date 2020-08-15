@@ -21,7 +21,8 @@
         <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
         <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
         <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
-          <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
+        <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-tags"></span> Báo Giá</a></li>
+        <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
         <li><a href="{% url 'logout' %}x"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
       </ul>
     </div>
@@ -57,11 +58,11 @@
       <tbody>
       {% for ob in car %}
     <tr>
-    <td>{{ob.car_name}}</td>
-    <td>{{ob.company_name}}</td>
-    <td>{{ob.num_of_seats}}</td>
-    <td>{{ob.cost_par_day}}</td>
-    <td>{{ob.like}}</td>
+    <td>{{ob.tên_xe}}</td>
+    <td>{{ob.tên_công_ty}}</td>
+    <td>{{ob.số_ghế}}</td>
+    <td>{{ob.giá}}</td>
+    <td>{{ob.lượt_thích}}</td>
     <td>
          <a href="{% url 'car_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
          <a href="{% url 'car_edit' ob.id %}"><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button></a>

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from system.views import home, car_list, order_created, car_update, car_detail, order_detail, car_delete, order_delete, contact, newcar, like_update, popular_car
+from system.views import home, car_list, order_created, car_update, car_detail, order_detail, car_delete, order_delete, contact, newcar, like_update, popular_car, quote
 
 urlpatterns = [
     url(r'^$', home, name = "home"),
@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^contact/$', contact, name = "contact"),
 
     url(r'^newcar/$', newcar, name = "newcar"),
-    url(r'^(?P<id>\d+)/like/$', like_update, name = "like"),
+    url(r'^(?P<id>\d+)/lượt_thích/$', like_update, name = "lượt_thích"),
     url(r'^popularcar/$', popular_car, name = "popularcar"),
-
+    url(r'^quote/$', quote, name = "quote"),
 ]

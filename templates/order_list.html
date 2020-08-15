@@ -48,11 +48,11 @@
       {% for ob in order %}
     <tr>
     <td>{{ob.id}} ORD</td>
-    <td>{{ob.employee_name}}</td>
-    <td>{{ob.cell_no}}</td>
-    <td>{{ob.car_name}}</td>
-    <td>{{ob.date}}</td>
-    <td>{{ob.to}}</td>
+    <td>{{ob.user}}</td>
+    <td>{{ob.số_điện_thoại}}</td>
+    <td>{{ob.tên_xe}}</td>
+    <td>{{ob.ngày_đi}}</td>
+    <td>{{ob.ngày_về}}</td>
     <td>
          <a href="{% url 'order_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
          <a href="{% url 'order_delete' ob.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>

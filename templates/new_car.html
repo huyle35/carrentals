@@ -14,18 +14,18 @@
 
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail">
-            {% if ob.image %}
-                <img src='{{ ob.image.url }}' class="img-responsive"/>
+            {% if ob.hình_ảnh %}
+                <img src='{{ ob.hình_ảnh.url }}' class="img-responsive"/>
             {% endif %}
           <div class="caption">
-            <strong>{{ ob.car_name }}</strong>
-            <p> Tên Công Ty: {{ ob.company_name }}<br>
-                Số Ghế Ngồi: {{ ob.num_of_seats }}<br>
-                Chi Phí / Ngày: {{ ob.cost_par_day }} VND<br>
+            <strong>{{ ob.tên_xe }}</strong>
+            <p> Tên Công Ty: {{ ob.tên_công_ty }}<br>
+                Số Ghế Ngồi: {{ ob.số_ghế }}<br>
+                Chi Phí / Ngày: {{ ob.giá }} VND<br>
             </p>
               <div class="pull-right">
             <p>
-                <a href="{% url 'like' ob.id %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                <a href="{% url 'lượt_thích' ob.id %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-thumbs-up"></span></a>
                 <a href="{% url 'car_detail' ob.id %}" class="btn btn-primary" role="button">Chi Tiết</a>
                 <a href="{% url 'order_create' %}" class="btn btn-danger" role="button">Đặt Xe</a></p>
               </div>

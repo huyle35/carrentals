@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse , HttpResponseRedirect
 from django.db.models import Q
-from .models import Car, Order, PrivateMsg
-from .forms import CarForm, OrderForm, MessageForm
+from .models import Car, Order, PrivateMsg, User, Quote
+from .forms import CarForm, OrderForm, MessageForm, HistoryForm, QuoteForm
 from django.core.exceptions import ValidationError
 
 
@@ -26,10 +26,10 @@ def car_list(request):
     query = request.GET.get('q')
     if query:
         car = car.filter(
-                     Q(car_name__icontains=query) |
-                     Q(company_name__icontains = query) |
-                     Q(num_of_seats__icontains=query) |
-                     Q(cost_par_day__icontains=query)
+                     Q(tên_xe__icontains=query) |
+                     Q(tên_công_ty__icontains = query) |
+                     Q(số_ghế__icontains=query) |
+                     Q(giá__icontains=query)
         )
 
     # pagination
@@ -99,9 +99,9 @@ def order_list(request):
     query = request.GET.get('q')
     if query:
         order = order.filter(
-            # Q(car_name__icontains=query)|
-            Q(employee_name__icontains=query)|
-            Q(cell_no__icontains=query)
+            Q(tên_xe__icontains=query)|
+            Q(tên_khách_hàng__icontains=query)|
+            Q(số_điện_thoại__icontains=query)
         )
     
     # pagination
@@ -131,8 +131,6 @@ def order_created(request):
     form = OrderForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
-        # if Order.date > Order.to:
-        #     raise ValidationError("Ngày trả xe lớn hơn ngày thuê xe. Vui lòng nhập lại !") 
         instance.save()
         return HttpResponseRedirect(instance.get_absolute_url())
 
@@ -166,10 +164,10 @@ def newcar(request):
     query = request.GET.get('q')
     if query:
         new = new.filter(
-            Q(car_name__icontains=query) |
-            Q(company_name__icontains=query) |
-            Q(num_of_seats__icontains=query) |
-            Q(cost_par_day__icontains=query)
+            Q(tên_xe__icontains=query) |
+            Q(tên_công_ty__icontains=query) |
+            Q(số_ghế__icontains=query) |
+            Q(giá__icontains=query)
         )
 
     # pagination
@@ -191,7 +189,7 @@ def newcar(request):
 def like_update(request, id=None):
     new = Car.objects.order_by('-id')
     like_count = get_object_or_404(Car, id=id)
-    like_count.like+=1
+    like_count.lượt_thích+=1
     like_count.save()
     context = {
         'car': new,
@@ -199,15 +197,15 @@ def like_update(request, id=None):
     return render(request,'new_car.html',context)
 
 def popular_car(request):
-    new = Car.objects.order_by('-like')
+    new = Car.objects.order_by('-lượt_thích')
     # seach
     query = request.GET.get('q')
     if query:
         new = new.filter(
-            Q(car_name__icontains=query) |
-            Q(company_name__icontains=query) |
-            Q(num_of_seats__icontains=query) |
-            Q(cost_par_day__icontains=query)
+            Q(tên_xe__icontains=query) |
+            Q(tên_công_ty__icontains=query) |
+            Q(số_ghế__icontains=query) |
+            Q(giá__icontains=query)
         )
 
     # pagination
@@ -238,6 +236,18 @@ def contact(request):
     }
     return render(request,'contact.html', context)
 
+def quote(request):
+    form = QuoteForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return render(request,'quote_success.html')
+    context = {
+        "form": form,
+        "title": "Quote",
+    }
+    return render(request,'quote.html', context)
+
 #-----------------Admin Section-----------------
 
 def admin_car_list(request):
@@ -246,10 +256,10 @@ def admin_car_list(request):
     query = request.GET.get('q')
     if query:
         car = car.filter(
-            Q(car_name__icontains=query) |
-            Q(company_name__icontains=query) |
-            Q(num_of_seats__icontains=query) |
-            Q(cost_par_day__icontains=query)
+            Q(tên_xe__icontains=query) |
+            Q(tên_công_ty__icontains=query) |
+            Q(số_ghế__icontains=query) |
+            Q(giá__icontains=query)
         )
 
     # pagination
@@ -275,11 +285,14 @@ def admin_msg(request):
     }
     return render(request, 'admin_msg.html', context)
 
+def admin_quote(request):
+    admin_quote = Quote.objects.order_by('-id')
+    context={
+        "quote": admin_quote,
+    }
+    return render(request, 'admin_quote.html', context)
+
 def msg_delete(request,id=None):
     query = get_object_or_404(PrivateMsg, id=id)
     query.delete()
     return HttpResponseRedirect("/message/")
-
-
-# def about(request):
-#     return render(request, 'gioithieu.html')

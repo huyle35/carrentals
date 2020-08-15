@@ -211,14 +211,14 @@
 
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail">
-            {% if ob.image %}
-                <img src='{{ ob.image.url }}' class="img-responsive"/>
+            {% if ob.hình_ảnh %}
+                <img src='{{ ob.hình_ảnh.url }}' class="img-responsive"/>
             {% endif %}
           <div class="caption">
-            <strong>{{ ob.car_name }}</strong>
-            <p> Tên Công Ty: <span style="color:red">{{ ob.company_name }}</span><br>
-                Số Ghế Ngồi: <span style="color:red">{{ ob.num_of_seats }}</span><br>
-                Chi Phí / ngày: <span style="color:red">{{ ob.cost_par_day }} VND</span><br>
+            <strong>{{ ob.tên_xe }}</strong>
+            <p> Tên Công Ty: <span style="color:red">{{ ob.tên_công_ty }}</span><br>
+                Số Ghế Ngồi: <span style="color:red">{{ ob.số_ghế }}</span><br>
+                Chi Phí / ngày: <span style="color:red">{{ ob.giá }} VND</span><br>
             </p>
               {% if user.is_staff %}
               <div class="pull-right">

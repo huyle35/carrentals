@@ -1,5 +1,4 @@
 {% load static %}
-{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,8 +196,8 @@
   }
   </style>
 </head>
-<body>
 <br><br>
+<body>
 <nav class="navbar navbar-custom navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -209,6 +208,7 @@
     </div>
       <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
+         <li>
 {% block nav %}
         <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
         <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
@@ -219,23 +219,19 @@
     </div>
   </div>
 </nav>
-</body>
-</html>
-{% block body %}
-<div class ='col-sm-6 col-sm-offset-3'>
-<div class="panel-info text-success ">
-<p class="list-group-item active" >
-    <strong><span class="glyphicon glyphicon-info-sign "></span> THÔNG TIN ĐẶT XE </strong>
-  </p><br>
-<form method="POST" action="" >{% csrf_token %}
-      {{form|crispy}}
-</div>
-    </div>
-  <div class="form-group row">
-    <div class="col-sm-offset-7 col-sm-10">
-    <br>
-      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Đặt Xe</button>
-    </div>
-  </div>
-</form>
-{% endblock %}
+
+<!-- Table -->
+  <table class="table table-bordered table-striped table-hover">
+   <tr>
+     <td><strong>User</strong></td>
+   <td><strong>Car</strong></td>
+
+  </tr>
+      {% for ob in history %}
+    <tr>
+    <td>{{ob.id}} user</td>
+    <td>{{ob.tên_khách_hàng}}</td>
+
+</tr>
+    {% endfor %}
+  </table>

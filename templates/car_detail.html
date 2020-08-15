@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Chi Tiết Về {{detail.car_name}} {% endblock %}
+{% block title %} Chi Tiết Về {{detail.tên_xe}} {% endblock %}
 
 {% block body %}
 
@@ -10,14 +10,14 @@
   <div class="list-group-item active">
     <strong><span class="glyphicon glyphicon-film"></span> Thông Tin Chi Tiết</strong>
   </div>
-  {% if detail.image %}
-  <img src='{{ detail.image.url }}' class="img-responsive"/>
+  {% if detail.hình_ảnh %}
+  <img src='{{ detail.hình_ảnh.url }}' class="img-responsive"/>
   {% endif %}
-  <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.car_name}}</a>
-  <a href="" class="list-group-item"><strong>Tên Công Ty   : </strong>{{detail.company_name}}</a>
-  <a href="" class="list-group-item"><strong>Số Ghế Ngồi   : </strong>{{detail.num_of_seats}}</a>
-  <a href="" class="list-group-item"><strong>Giá / ngày   : </strong>{{detail.cost_par_day}} VND</a>
-  <a href="" class="list-group-item"><strong>Lượt Thích   : </strong>{{detail.like}}</a>
+  <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.tên_xe}}</a>
+  <a href="" class="list-group-item"><strong>Tên Công Ty   : </strong>{{detail.tên_công_ty}}</a>
+  <a href="" class="list-group-item"><strong>Số Ghế Ngồi   : </strong>{{detail.số_ghế}}</a>
+  <a href="" class="list-group-item"><strong>Giá / ngày   : </strong>{{detail.giá}} VND</a>
+  <a href="" class="list-group-item"><strong>Lượt Thích   : </strong>{{detail.lượt_thích}}</a>
   <a href="" class="list-group-item"><strong>Thông Tin Khác   : </strong>{{detail.content}}</a><br>
   <div class="pull-right">
     <a href="{% url 'newcar' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-list"></span> Xe Mới Cập Nhật</button></a>

@@ -1,25 +1,35 @@
 from django.contrib import admin
-from .models import Car, Order, PrivateMsg
+from .models import Car, Order, PrivateMsg, Quote
 # Register your models here.
 
 class CarAdmin(admin.ModelAdmin):
 
-    list_display = ("car_name", 
-                    "image", 
-                    "company_name")
+    list_display = ("tên_xe", 
+                    "hình_ảnh", 
+                    "tên_công_ty")
 class OrderAdmin(admin.ModelAdmin):
 
-    list_display = ("car_name", 
-                    "date", 
-                    "to", 
-                    "employee_name")
+    list_display = ("tên_xe", 
+                    "ngày_đi", 
+                    "ngày_về", 
+                    )
 
 class PrivateMsgAdmin(admin.ModelAdmin):
 
-    list_display = ("name", 
+    list_display = ("tên_người_dùng", 
                     "email", 
-                    "message")
+                    "nội_dung")
+
+class QuoteAdmin(admin.ModelAdmin):
+
+    list_display = ("số_điện_thoại",
+                    "tên_xe",
+                    "ngày_đi",
+                    "ngày_về",
+                    "xuất_phát",
+                    "điểm_đến",)                   
 
 admin.site.register(Car, CarAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(PrivateMsg, PrivateMsgAdmin)
+admin.site.register(Quote, QuoteAdmin)

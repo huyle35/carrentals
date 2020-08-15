@@ -1,4 +1,6 @@
 {% load static %}
+{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -213,6 +215,7 @@
         <li><a href="#services">Dịch Vụ</a></li>
         <li><a href="#contact">Liên Hệ</a></li>
         <li><a href="{% url 'car_list' %}">Danh Sách Xe</a></li>
+        <li><a href="{% url 'quote' %}">Báo Giá</a></li>
         <li><a href="{% url 'login' %}">Đăng Nhập</a></li>
       </ul>
     </div>
@@ -231,7 +234,7 @@
     <div class="container">
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-          <img src="{% static 'images/bg.jpg' %}"/>
+          <img src="{% static 'images/hero_1.jpg' %}"/>
       </div>
       <div class="item">
         <img src="{% static 'images/bg2.jpg' %}"/>
@@ -251,7 +254,6 @@
       <span class="sr-only">Trang sau</span>
     </a>
   </div>
-
 <!-- Container (About Section) -->
 <div class="container">
 <div id="about" class="container-fluid">
