@@ -12,7 +12,7 @@ class Car(models.Model):
     tên_xe = models.CharField(max_length=100)
     tên_công_ty = models.CharField(max_length=100)
     số_ghế = models.IntegerField()
-    giá = models.CharField(max_length=50)
+    giá_tham_khảo = models.FloatField(max_length=50)
     nội_dung = models.TextField()
     lượt_thích = models.IntegerField(default=0)
 
@@ -24,8 +24,8 @@ class Car(models.Model):
 
 class Order(models.Model):
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='order')
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
-    số_điện_thoại = models.CharField(max_length=15)
+    tên_khách_hàng = models.CharField(max_length=200)
+    số_điện_thoại = models.IntegerField()
     địa_chỉ = models.TextField()
     ngày_đi = models.DateTimeField()
     ngày_về = models.DateTimeField()

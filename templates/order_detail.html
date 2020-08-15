@@ -209,12 +209,12 @@
       <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
          <li>
-{% block nav %}
+    {% block nav %}
         <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
         <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
         <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Trang Chủ</a></li>
-{% endblock %}
+    {% endblock %}
       </ul>
     </div>
   </div>
@@ -229,7 +229,7 @@
   <p class="list-group-item active">
     <strong><span class="glyphicon glyphicon-tag"></span> Thông Tin Đặt Xe </strong>
   </p>
-   <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.tên_xe}}</a>
+  <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.tên_xe}}</a>
   <a href="" class="list-group-item"><strong>Tên Khách Hàng: </strong>{{detail.user}}</a>
   <a href="" class="list-group-item"><strong>Số Điện Thoại: </strong>{{detail.số_điện_thoại}}</a>
   <a href="" class="list-group-item"><strong>Địa Chỉ: </strong>{{detail.địa_chỉ}}</a>
@@ -241,7 +241,6 @@
       <div class="pull-right">
         <a href="{% url 'order_edit' detail.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Chỉnh Sửa</button></a>
         <a href="{% url 'order_delete' detail.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Hủy Bỏ</button></a>
-        {% comment %} <a href=""><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> In</button></a> {% endcomment %}
         </div>
   </div>
 </div>

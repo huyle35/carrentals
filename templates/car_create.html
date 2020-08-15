@@ -16,14 +16,14 @@
 {% endblock %}
 {% block body %}
 <div class ='col-sm-6 col-sm-offset-3'>
-    <div class="panel panel-primary">
+    <div class="panel-primary">
 <div class="list-group-item active">
     <strong><span class="glyphicon glyphicon-film"></span> Thêm Xe</strong>
   </div>
 <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
       {{form|crispy}}
 
-    <input type="submit" class='btn btn-primary' value="Create post">
+    <input type="submit" class='btn btn-primary' value="Thêm Xe">
 </form>
         </div>
 </div>

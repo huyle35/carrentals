@@ -19,11 +19,12 @@
             {% endif %}
           <div class="caption">
             <strong>{{ ob.tên_xe }}</strong>
-            <p> Tên Công Ty: {{ ob.tên_công_ty }}<br>
-                Số Ghế Ngồi: {{ ob.số_ghế }}<br>
-                Chi Phí / Ngày: {{ ob.giá }} VND<br>
+            <hr>
+            <p> Tên Công Ty: <span style="color:red">{{ ob.tên_công_ty }}</span><br>
+                Số Ghế Ngồi: <span style="color:red">{{ ob.số_ghế }}</span><br>
+                Giá Tham Khảo: <span style="color:red">{{ ob.giá_tham_khảo }} VND / ngày</span><br>
             </p>
-              <div class="pull-right">
+              <div>
             <p>
                 <a href="{% url 'lượt_thích' ob.id %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-thumbs-up"></span></a>
                 <a href="{% url 'car_detail' ob.id %}" class="btn btn-primary" role="button">Chi Tiết</a>

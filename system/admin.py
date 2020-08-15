@@ -4,14 +4,23 @@ from .models import Car, Order, PrivateMsg, Quote
 
 class CarAdmin(admin.ModelAdmin):
 
-    list_display = ("tên_xe", 
-                    "hình_ảnh", 
-                    "tên_công_ty")
+    list_display = ("hình_ảnh",
+                    "tên_xe",
+                    "tên_công_ty",
+                    "số_ghế",
+                    "giá_tham_khảo",
+                    "nội_dung",)
+                    
 class OrderAdmin(admin.ModelAdmin):
 
-    list_display = ("tên_xe", 
-                    "ngày_đi", 
-                    "ngày_về", 
+    list_display = ("tên_xe",
+                    "tên_khách_hàng",
+                    "số_điện_thoại",
+                    "địa_chỉ",
+                    "ngày_đi",
+                    "ngày_về",
+                    "xuất_phát",
+                    "điểm_đến", 
                     )
 
 class PrivateMsgAdmin(admin.ModelAdmin):

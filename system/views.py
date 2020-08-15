@@ -61,7 +61,7 @@ def car_created(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/auth")
     context = {
         "form" : form,
         "title": "Thêm Xe Mới"
@@ -74,7 +74,7 @@ def car_update(request, id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect(instance.get_absolute_url())
+        return HttpResponseRedirect("/auth")
     context = {
         "form": form,
         "title": "Chỉnh Sửa Xe"
@@ -296,3 +296,8 @@ def msg_delete(request,id=None):
     query = get_object_or_404(PrivateMsg, id=id)
     query.delete()
     return HttpResponseRedirect("/message/")
+
+def quote_delete(request,id=None):
+    query = get_object_or_404(Quote, id=id)
+    query.delete()
+    return HttpResponseRedirect("/quote/")

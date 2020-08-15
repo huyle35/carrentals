@@ -3,6 +3,11 @@ from .models import Car, Order, PrivateMsg, History, Quote
 from django.contrib.auth.models import User
 
 class CarForm(forms.ModelForm):
+    tên_xe = forms.CharField(required=True)
+    tên_công_ty = forms.CharField(required=False)
+    số_ghế = forms.IntegerField(required=True)
+    giá_tham_khảo = forms.FloatField(required=True)
+
     class Meta:
         model = Car
         fields = [
@@ -10,14 +15,23 @@ class CarForm(forms.ModelForm):
             "tên_xe",
             "tên_công_ty",
             "số_ghế",
-            "giá",
+            "giá_tham_khảo",
             "nội_dung",
         ]
 class OrderForm(forms.ModelForm):
+    tên_khách_hàng = forms.CharField(max_length=50, required=False)
+    số_điện_thoại = forms.CharField(required=True)
+    địa_chỉ = forms.CharField(required=False)
+    ngày_đi = forms.DateField(required=True)
+    ngày_về = forms.DateField(required=True)
+    xuất_phát = forms.CharField(required=True)
+    điểm_đến = forms.CharField(required=True)
+
     class Meta:
         model = Order
         fields = [
             "tên_xe",
+            "tên_khách_hàng",
             "số_điện_thoại",
             "địa_chỉ",
             "ngày_đi",

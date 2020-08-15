@@ -10,11 +10,13 @@
         <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
         <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
           <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
-        <li><a href="{% url 'logout' %}x"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
       </ul>
     </div>
 {% endblock %}
 {% block body %}
+<br><br>
+
 <div class='container table-responsive'>
 <div class="panel panel-primary">
   <!-- Default panel contents -->

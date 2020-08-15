@@ -209,16 +209,17 @@
 <div class="row">
         {% for ob in car %}
 
-      <div class="col-sm-6 col-md-3">
+      <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             {% if ob.hình_ảnh %}
                 <img src='{{ ob.hình_ảnh.url }}' class="img-responsive"/>
             {% endif %}
           <div class="caption">
             <strong>{{ ob.tên_xe }}</strong>
+            <hr>
             <p> Tên Công Ty: <span style="color:red">{{ ob.tên_công_ty }}</span><br>
                 Số Ghế Ngồi: <span style="color:red">{{ ob.số_ghế }}</span><br>
-                Chi Phí / ngày: <span style="color:red">{{ ob.giá }} VND</span><br>
+                Giá Tham Khảo: <span style="color:red">{{ ob.giá_tham_khảo }} VND / ngày</span><br>
             </p>
               {% if user.is_staff %}
               <div class="pull-right">
