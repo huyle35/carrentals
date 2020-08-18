@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse , HttpResponseRedirect
 from django.db.models import Q
-from .models import Car, Order, PrivateMsg, User, Quote
-from .forms import CarForm, OrderForm, MessageForm, HistoryForm, QuoteForm
+from .models import Car, Order, PrivateMsg, User, Quote, Customer
+from .forms import CarForm, OrderForm, MessageForm, QuoteForm, ProfileForm
 from django.core.exceptions import ValidationError
 
 
@@ -29,7 +29,7 @@ def car_list(request):
                      Q(tên_xe__icontains=query) |
                      Q(tên_công_ty__icontains = query) |
                      Q(số_ghế__icontains=query) |
-                     Q(giá__icontains=query)
+                     Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -167,7 +167,7 @@ def newcar(request):
             Q(tên_xe__icontains=query) |
             Q(tên_công_ty__icontains=query) |
             Q(số_ghế__icontains=query) |
-            Q(giá__icontains=query)
+            Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -205,7 +205,7 @@ def popular_car(request):
             Q(tên_xe__icontains=query) |
             Q(tên_công_ty__icontains=query) |
             Q(số_ghế__icontains=query) |
-            Q(giá__icontains=query)
+            Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -248,6 +248,31 @@ def quote(request):
     }
     return render(request,'quote.html', context)
 
+def customer_profile(request):
+    form = ProfileForm(request.POST or None)
+    if form.is_valid():
+        profile = form.save(commit=False)
+        profile.save()
+        return HttpResponseRedirect(profile.get_absolute_url())
+
+    context = {
+        "form": form,
+        "title": "Profile"
+    }
+    return render(request, 'profile.html', context)
+
+def profile_update(request, id=None):
+    profile = get_object_or_404(Customer, id=id)
+    form = ProfileForm(request.POST or None, instance=profile)
+    if form.is_valid():
+        profile = form.save(commit=False)
+        profile.save()
+        return render(request, 'profile_update.html')
+    context = {
+        "form": form,
+        "title": "Thay đổi thông tin"
+    }
+    return render(request, 'profile.html', context)
 #-----------------Admin Section-----------------
 
 def admin_car_list(request):
@@ -259,7 +284,7 @@ def admin_car_list(request):
             Q(tên_xe__icontains=query) |
             Q(tên_công_ty__icontains=query) |
             Q(số_ghế__icontains=query) |
-            Q(giá__icontains=query)
+            Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -280,15 +305,51 @@ def admin_car_list(request):
 
 def admin_msg(request):
     msg = PrivateMsg.objects.order_by('-id')
+    query = request.GET.get('q')
+    if query:
+        msg = msg.filter(
+            Q(tên_người_dùng__icontains=query) |
+            Q(email__icontains=query)
+        )
+
+    # pagination
+    paginator = Paginator(msg, 12)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    try:
+        msg = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        msg = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        msg = paginator.page(paginator.num_pages)
     context={
-        "car": msg,
+        "msg": msg,
     }
     return render(request, 'admin_msg.html', context)
 
 def admin_quote(request):
-    admin_quote = Quote.objects.order_by('-id')
+    quote = Quote.objects.order_by('-id')
+    query = request.GET.get('q')
+    if query:
+        quote = quote.filter(
+            # Q(tên_xe__icontains=query) |
+            Q(số_điện_thoại__icontains=query)
+        )
+
+    # pagination
+    paginator = Paginator(quote, 12)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    try:
+        quote = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        quote = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        quote = paginator.page(paginator.num_pages)
     context={
-        "quote": admin_quote,
+        "quote": quote,
     }
     return render(request, 'admin_quote.html', context)
 
@@ -300,4 +361,4 @@ def msg_delete(request,id=None):
 def quote_delete(request,id=None):
     query = get_object_or_404(Quote, id=id)
     query.delete()
-    return HttpResponseRedirect("/quote/")
+    return HttpResponseRedirect("/adminquote/")

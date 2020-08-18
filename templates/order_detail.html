@@ -230,9 +230,7 @@
     <strong><span class="glyphicon glyphicon-tag"></span> Thông Tin Đặt Xe </strong>
   </p>
   <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.tên_xe}}</a>
-  <a href="" class="list-group-item"><strong>Tên Khách Hàng: </strong>{{detail.user}}</a>
-  <a href="" class="list-group-item"><strong>Số Điện Thoại: </strong>{{detail.số_điện_thoại}}</a>
-  <a href="" class="list-group-item"><strong>Địa Chỉ: </strong>{{detail.địa_chỉ}}</a>
+  <a href="" class="list-group-item"><strong>Tên Khách Hàng: </strong>{{detail.tên_khách_hàng}}</a>
   <a href="" class="list-group-item"><strong>Từ Ngày: </strong>{{detail.ngày_đi}}</a>
   <a href="" class="list-group-item"><strong>Đến Ngày: </strong>{{detail.ngày_về}}</a>
   <a href="" class="list-group-item"><strong>Đi từ: </strong>{{detail.xuất_phát}}</a>
@@ -241,7 +239,7 @@
       <div class="pull-right">
         <a href="{% url 'order_edit' detail.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Chỉnh Sửa</button></a>
         <a href="{% url 'order_delete' detail.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Hủy Bỏ</button></a>
-        </div>
+      </div>
   </div>
 </div>
 

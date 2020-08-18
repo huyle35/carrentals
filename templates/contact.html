@@ -9,9 +9,7 @@
 {% block nav %}
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
-        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
-        <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
+        <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-list"></span>Danh Sách Xe</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span> Thoát</a></li>
       </ul>
     </div>

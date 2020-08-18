@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} Báo Giá {% endblock %}
+{% block title %} Cập Nhật Thông Tin {% endblock %}
 
 {% block search %}
 
@@ -17,11 +17,11 @@
 {% endblock %}
 {% block body %}
 <div class ='col-sm-5 col-sm-offset-3'>
-  <strong><h2 style="color: red"> Nhập Thông Tin Báo Giá </h2></strong>
+  <strong><h2 style="color: red"> Cập Nhật Thông Tin </h2></strong>
     <form method="POST" action="">{% csrf_token %}
       {{form|crispy}}
         <div class="pull-right">
-            <input type="submit" class="btn btn-primary" value="Gửi"/>
+            <input type="submit" class="btn btn-primary" value="Cập Nhật"/>
         </div>
 </form>
 </div>

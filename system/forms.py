@@ -1,5 +1,5 @@
 from django import forms
-from .models import Car, Order, PrivateMsg, History, Quote
+from .models import Car, Order, PrivateMsg, Quote, Customer
 from django.contrib.auth.models import User
 
 class CarForm(forms.ModelForm):
@@ -20,8 +20,6 @@ class CarForm(forms.ModelForm):
         ]
 class OrderForm(forms.ModelForm):
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
-    số_điện_thoại = forms.CharField(required=True)
-    địa_chỉ = forms.CharField(required=False)
     ngày_đi = forms.DateField(required=True)
     ngày_về = forms.DateField(required=True)
     xuất_phát = forms.CharField(required=True)
@@ -32,31 +30,29 @@ class OrderForm(forms.ModelForm):
         fields = [
             "tên_xe",
             "tên_khách_hàng",
-            "số_điện_thoại",
-            "địa_chỉ",
             "ngày_đi",
             "ngày_về",
             "xuất_phát",
             "điểm_đến",
         ]
+
 class MessageForm(forms.ModelForm):
     class Meta:
         model = PrivateMsg
         fields = [
             "tên_người_dùng",
+            "số_điện_thoại",
             "email",
             "nội_dung",
         ]
 
-class HistoryForm(forms.ModelForm):
-    class Meta:
-        model = History
-        fields = [
-            "user",
-            "tên_xe",
-        ]
-
 class QuoteForm(forms.ModelForm):
+    số_điện_thoại = forms.IntegerField(required=True)
+    ngày_đi = forms.DateField(required=True, help_text="Ví dụ: 01/01/2020")
+    ngày_về = forms.DateField(required=True, help_text="Ví dụ: 01/01/2020")
+    xuất_phát = forms.CharField(required=True)
+    điểm_đến = forms.CharField(required=True)
+
     class Meta:
         model = Quote
         fields = [
@@ -66,4 +62,17 @@ class QuoteForm(forms.ModelForm):
             "ngày_về",
             "xuất_phát",
             "điểm_đến",
+        ]
+
+class ProfileForm(forms.ModelForm):
+    tên_khách_hàng = forms.CharField()
+    số_điện_thoại = forms.IntegerField()
+    địa_chỉ = forms.CharField()
+
+    class Meta:
+        model = Customer
+        fields = [
+            "tên_khách_hàng",
+            "số_điện_thoại",
+            "địa_chỉ",
         ]

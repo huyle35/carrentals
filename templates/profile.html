@@ -209,29 +209,30 @@
       <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
          <li>
-{% block nav %}
+    {% block nav %}
         <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
         <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
         <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Trang Chủ</a></li>
-{% endblock %}
+    {% endblock %}
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Table -->
-  <table class="table table-bordered table-striped table-hover">
-   <tr>
-     <td><strong>User</strong></td>
-   <td><strong>Car</strong></td>
+{% block body %}
+<div class ='col-sm-6 col-sm-offset-3'>
+  <p class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-tag"></span>  THÔNG TIN CÁ NHÂN CỦA BẠN </strong>
+  </p>
+    <a href="" class="list-group-item"><strong>Tên Khách Hàng: </strong>{{profile.tên_khách_hàng}}</a>
+    <a href="" class="list-group-item"><strong>Số điện thoại: </strong>{{profile.số_điện_thoại}}</a>
+    <a href="" class="list-group-item"><strong>Địa chỉ: </strong>{{profile.địa_chỉ}}</a>
+  <hr>
+      <div class="pull-right">
+        <a href="{% url 'update_customer' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Chỉnh Sửa</button></a>
+      </div>
+  </div>
+</div>
 
-  </tr>
-      {% for ob in history %}
-    <tr>
-    <td>{{ob.id}} user</td>
-    <td>{{ob.tên_khách_hàng}}</td>
-
-</tr>
-    {% endfor %}
-  </table>
+{% endblock %}

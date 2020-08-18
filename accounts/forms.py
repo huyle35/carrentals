@@ -18,7 +18,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
     email = forms.EmailField(max_length=254, help_text='Vui lòng nhập Email hợp lệ.')
-    birth_date = forms.DateField(required=False, help_text='Vui lòng nhập theo Format: YYYY-MM-DD')
+    birth_date = forms.DateField(required=False, help_text='Ví dụ: 2000/01/01')
 
     class Meta:
         model = User
@@ -35,8 +35,8 @@ class SignUpForm(UserCreationForm):
         return cleaned_data
 
     def clean_username(self):
-
         username = self.cleaned_data['username']
+
         if not re.search(r'^\w+$', username):
             raise forms.ValidationError("Tên tài khoản có kí tự đặc biệt")
         try:
@@ -44,7 +44,14 @@ class SignUpForm(UserCreationForm):
         except User.DoesNotExist:
             return username
         raise forms.ValidationError("Tài khoản đã tồn tại")
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
 
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email này đã tồn tại. Vui lòng nhập Email khác !')
+        else:
+            return email
 
     def save(self, commit=True):
         user = super(SignUpForm, self).save(commit)
@@ -68,3 +75,5 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError("Tài khoản không còn hoạt động. Vui lòng đăng ký tài khoản mới !")
         return super(UserLoginForm,self).clean(*args, **kwargs)
 
+
+    

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from system.views import admin_car_list, admin_msg, admin_quote, order_list, car_created, order_update, order_delete, msg_delete, home, quote_delete
+from system.views import admin_car_list, admin_msg, admin_quote, order_list, car_created, order_update, order_delete, msg_delete, home, quote_delete, customer_profile, profile_update
 from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
@@ -22,6 +22,8 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
+    path('profile/', customer_profile, name='profile'),
+    path('update/', profile_update, name = "update_customer"),
     path('', include('django.contrib.auth.urls')),
 ]
 if settings.DEBUG:

@@ -20,6 +20,15 @@
   <!-- Default panel contents -->
   <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Báo Giá</strong></h5> </div>
     <div class="panel-body">
+
+  <!-- search box-->
+  <form method="GET" class="navbar-form navbar-right" role="search">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Tìm số điện thoại" value="{{request.GET.q}}" name="q">
+    </div>
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
+  </form>
+<!-- Table -->
   <!-- Table -->
   <table class="table table-bordered table-striped table-hover">
    <tr>
@@ -29,6 +38,7 @@
     <td><strong>Đến Ngày</strong></td>
     <td><strong>Xuất Phát</strong></td>
     <td><strong>Điểm Đến</strong></td>
+    <td><strong>Chỉnh Sửa</strong></td>
   </tr>
       <tbody>
       {% for ob in quote %}
@@ -40,7 +50,7 @@
     <td>{{ob.xuất_phát}}</td>
     <td>{{ob.điểm_đến}}</td>
     <td>
-         <a href="{% url 'msg_delete' ob.id %}"><button type="button" class="btn btn-danger" onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
+         <a href="{% url 'quote_delete' ob.id %}"><button type="button" class="btn btn-danger" onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
     </td>
     </tr>
     {% endfor %}
@@ -48,15 +58,15 @@
   </table>
 <nav>
   <ul class="pager">
-    <li class="previous">{% if car.has_previous %}
+    <li class="previous">{% if quote.has_previous %}
             <a href="?page={{ movie.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Trang trước</a>
     {% endif %}
     </li>
       <li class="previous" style="color: black !important;">
-          Trang {{ car.number }} / {{ car.paginator.num_pages }}.
+          Trang {{ quote.number }} / {{ quote.paginator.num_pages }}.
 
     </li>
-    <li class="next">{% if car.has_next %}
+    <li class="next">{% if quote.has_next %}
             <a href="?page={{ movie.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
         Trang sau <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
   </ul>
