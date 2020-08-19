@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %} Báo Giá {% endblock %}
+{% block title %} Tin Nhắn {% endblock %}
 {% block search %}
 {% endblock %}
 {% block nav %}
@@ -8,8 +8,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
         <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
-        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
-        <li><a href="{% url 'admincustomer' %}"><span class="glyphicon glyphicon-tags"></span> Khách Hàng</a></li>
+        <li><a href="{% url 'adminquote' %}"><span class="glyphicon glyphicon-tags"></span> Báo Giá</a></li>
         <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
       </ul>
@@ -19,55 +18,45 @@
 <div class='container table-responsive'>
 <div class="panel panel-primary">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Báo Giá</strong></h5> </div>
+  <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Khách Hàng</strong></h5> </div>
     <div class="panel-body">
+  <!-- Table -->
 
-  <!-- search box-->
-  <form method="GET" class="navbar-form navbar-right" role="search">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Tìm số điện thoại" value="{{request.GET.q}}" name="q">
-    </div>
-    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
-  </form>
-<!-- Table -->
+     <!-- search box-->
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Tìm kiếm" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
+      </form>
+
   <!-- Table -->
   <table class="table table-bordered table-striped table-hover">
    <tr>
+    <td><strong>User</strong></td>
     <td><strong>Số Điện Thoại</strong></td>
-    <td><strong>Tên Xe</strong></td>
-    <td><strong>Từ Ngày</strong></td>
-    <td><strong>Đến Ngày</strong></td>
-    <td><strong>Xuất Phát</strong></td>
-    <td><strong>Điểm Đến</strong></td>
-    <td><strong>Chỉnh Sửa</strong></td>
+    <td><strong>Địa Chỉ</strong></td>
   </tr>
       <tbody>
-      {% for ob in quote %}
+      {% for ob in profile %}
     <tr>
-    <td>{{ob.số_điện_thoại}}</td>
-    <td>{{ob.tên_xe}}</td>
-    <td>{{ob.ngày_đi}}</td>
-    <td>{{ob.ngày_về}}</td>
-    <td>{{ob.xuất_phát}}</td>
-    <td>{{ob.điểm_đến}}</td>
-    <td>
-         <a href="{% url 'quote_delete' ob.id %}"><button type="button" class="btn btn-danger" onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
-    </td>
+    <td>{{ob.user}}</td>
+    <td>{{"0"}}{{ob.số_điện_thoại}}</td>
+    <td>{{ob.địa_chỉ}}</td>
     </tr>
     {% endfor %}
 </tbody>
   </table>
 <nav>
   <ul class="pager">
-    <li class="previous">{% if quote.has_previous %}
+    <li class="previous">{% if profile.has_previous %}
             <a href="?page={{ movie.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Trang trước</a>
     {% endif %}
     </li>
       <li class="previous" style="color: black !important;">
-          Trang {{ quote.number }} / {{ quote.paginator.num_pages }}.
-
+          Trang {{ profile.number }} / {{ profile.paginator.num_pages }}.
     </li>
-    <li class="next">{% if quote.has_next %}
+    <li class="next">{% if profile.has_next %}
             <a href="?page={{ movie.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
         Trang sau <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
   </ul>

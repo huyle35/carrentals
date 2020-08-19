@@ -3,11 +3,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from system.views import admin_car_list, admin_msg, admin_quote, order_list, car_created, order_update, order_delete, msg_delete, home, quote_delete, customer_profile, profile_update
-from accounts.views import (login_view, register_view, logout_view)
+from system.views import admin_car_list, admin_msg, admin_quote, order_list, car_created, order_update, order_delete, msg_delete, home, quote_delete, customer_profile, profile_update, admin_customer
+from accounts.views import (login_view, register_view, logout_view, login_admin)
 
 urlpatterns = [
     path('admin', admin.site.urls),
+    path('manage', login_admin, name='manage'),
     path('auth', admin_car_list, name='adminIndex'),
     path('', home, name = "home"),
     path('listOrder/', order_list, name = "order_list"),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     path('profile/', customer_profile, name='profile'),
     path('update/', profile_update, name = "update_customer"),
+    path('admincustomer/', admin_customer, name='admincustomer'),
     path('', include('django.contrib.auth.urls')),
 ]
 if settings.DEBUG:

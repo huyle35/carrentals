@@ -22,4 +22,6 @@ urlpatterns = [
     path('popularcar/', popular_car, name = "popularcar"),
     path('quote/', quote, name = "quote"),
 
+    path('update/', profile_update, name = "update_customer"),
+
 ]

@@ -5,6 +5,7 @@ from django.db.models import Q
 from .models import Car, Order, PrivateMsg, User, Quote, Customer
 from .forms import CarForm, OrderForm, MessageForm, QuoteForm, ProfileForm
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import user_passes_test
 
 
 def home(request):
@@ -248,33 +249,32 @@ def quote(request):
     }
     return render(request,'quote.html', context)
 
-def customer_profile(request):
-    form = ProfileForm(request.POST or None)
-    if form.is_valid():
-        profile = form.save(commit=False)
-        profile.save()
-        return HttpResponseRedirect(profile.get_absolute_url())
-
-    context = {
-        "form": form,
-        "title": "Profile"
-    }
-    return render(request, 'profile.html', context)
-
 def profile_update(request, id=None):
-    profile = get_object_or_404(Customer, id=id)
+    if request.user.is_authenticated:
+        profile = User.objects.get(id=id)
+        form = ProfileForm(request.POST or None, instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+            return render(request, 'profile_update.html')
+        context = {
+            "form": form,
+            "title": "Thay đổi thông tin"
+        }
+        return render(request, 'profile.html', context)
+
+def customer_profile(request, id=None):
+    profile = Customer.objects.get(user_id = request.user.id)
     form = ProfileForm(request.POST or None, instance=profile)
     if form.is_valid():
         profile = form.save(commit=False)
         profile.save()
-        return render(request, 'profile_update.html')
     context = {
-        "form": form,
-        "title": "Thay đổi thông tin"
+        'profile': profile,
     }
     return render(request, 'profile.html', context)
 #-----------------Admin Section-----------------
-
+@user_passes_test(lambda u: u.is_superuser)
 def admin_car_list(request):
     car = Car.objects.order_by('-id')
 
@@ -352,6 +352,31 @@ def admin_quote(request):
         "quote": quote,
     }
     return render(request, 'admin_quote.html', context)
+
+def admin_customer(request):
+    profile = Customer.objects.order_by('-id')
+    query = request.GET.get('q')
+    if query:
+        profile = profile.filter(
+            # Q(tên_xe__icontains=query) |
+            Q(số_điện_thoại__icontains=query)
+        )
+
+    # pagination
+    paginator = Paginator(profile, 12)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    try:
+        profile = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        profile = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        profile = paginator.page(paginator.num_pages)
+    context={
+        "profile": profile,
+    }
+    return render(request, 'admin_customer.html', context)
 
 def msg_delete(request,id=None):
     query = get_object_or_404(PrivateMsg, id=id)

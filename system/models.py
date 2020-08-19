@@ -32,12 +32,12 @@ class Quote(models.Model):
     điểm_đến = models.CharField(max_length=100)
 
 class Customer(models.Model):
-    tên_khách_hàng = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer', null=True, blank=True)
     số_điện_thoại = models.IntegerField()
     địa_chỉ = models.TextField()
 
     def __str__(self):
-        return str(self.tên_khách_hàng)
+        return str(self.user.id)
 
 class PrivateMsg(models.Model):
     tên_người_dùng = models.CharField(max_length=100)
@@ -46,7 +46,7 @@ class PrivateMsg(models.Model):
     nội_dung = models.TextField()
 
     def __str__(self):
-        return str(self.user.first_name)
+        return str(self.tên_người_dùng)
 
 class Order(models.Model):
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='order')

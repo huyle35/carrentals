@@ -39,7 +39,7 @@ class QuoteAdmin(admin.ModelAdmin):
 
 class CustomerAdmin(admin.ModelAdmin):
     
-    list_display = ("tên_khách_hàng",
+    list_display = ("user",
                     "số_điện_thoại",
                     "địa_chỉ",
                     )                   

@@ -65,14 +65,12 @@ class QuoteForm(forms.ModelForm):
         ]
 
 class ProfileForm(forms.ModelForm):
-    tên_khách_hàng = forms.CharField()
     số_điện_thoại = forms.IntegerField()
     địa_chỉ = forms.CharField()
 
     class Meta:
         model = Customer
         fields = [
-            "tên_khách_hàng",
             "số_điện_thoại",
             "địa_chỉ",
         ]

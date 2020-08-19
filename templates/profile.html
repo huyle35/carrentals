@@ -221,17 +221,25 @@
 </nav>
 
 {% block body %}
+  <br>
+  <hr>
 <div class ='col-sm-6 col-sm-offset-3'>
   <p class="list-group-item active">
     <strong><span class="glyphicon glyphicon-tag"></span>  THÔNG TIN CÁ NHÂN CỦA BẠN </strong>
   </p>
-    <a href="" class="list-group-item"><strong>Tên Khách Hàng: </strong>{{profile.tên_khách_hàng}}</a>
+  {% if request.user.is_authenticated %}
+    <a href="" class="list-group-item"><strong>Tài Khoản: </strong>{{user.username}}</a>
+    <a href="" class="list-group-item"><strong>Họ và Tên: </strong>{{user.first_name}} {{user.last_name}}</a>
+    <a href="" class="list-group-item"><strong>Đăng ký từ: </strong>{{user.date_joined}}</a>
+    <a href="" class="list-group-item"><strong>Email: </strong>{{user.email}}</a>
+    <a href="" class="list-group-item"><strong>Đăng nhập gần đây: </strong>{{user.last_login}}</a>
+  {% endif %}
     <a href="" class="list-group-item"><strong>Số điện thoại: </strong>{{profile.số_điện_thoại}}</a>
     <a href="" class="list-group-item"><strong>Địa chỉ: </strong>{{profile.địa_chỉ}}</a>
   <hr>
-      <div class="pull-right">
+      {% comment %} <div class="pull-right">
         <a href="{% url 'update_customer' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Chỉnh Sửa</button></a>
-      </div>
+      </div> {% endcomment %}
   </div>
 </div>
 

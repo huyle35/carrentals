@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from django.shortcuts import render, redirect
@@ -17,7 +18,7 @@ from django.contrib.auth import (
     logout,
     get_user_model,
 )
-from .forms import UserLoginForm, UserCreationForm
+from .forms import UserLoginForm, UserCreationForm, AdminLoginForm
 
 def login_view(request):
     form1 = UserLoginForm(request.POST or None)
@@ -29,6 +30,19 @@ def login_view(request):
             login(request, user)
             return redirect("/car/newcar/")
     return render(request, "login.html", {"form": form1, "title": "Đăng Nhập"})
+
+@login_required
+def login_admin(request):
+    form2 = AdminLoginForm(request.POST or None)
+    if form2.is_valid():
+        username = form2.cleaned_data.get("username")
+        password = form2.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        if not request.user.is_superuser:
+            login(request, user)
+            return redirect("/auth")
+
+    return render(request, "login.html", {"form": form2, "title": "Đăng Nhập"})
 
 def register_view(request):
     if request.method == 'POST':
