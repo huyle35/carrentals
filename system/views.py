@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse , HttpResponseRedirect
 from django.db.models import Q
-from .models import Car, Order, PrivateMsg, User, Quote, Customer
+from .models import Car, Order, PrivateMsg, User, Quote, Customer, Category
 from .forms import CarForm, OrderForm, MessageForm, QuoteForm, ProfileForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import user_passes_test
+from django.views.generic import View
 
 
 def home(request):
@@ -49,6 +50,18 @@ def car_list(request):
     }
     return render(request, 'car_list.html', context)
 
+class CategoryView(View):
+    def get(self, *args, **kwargs):
+        category = Category.objects.get(slug=self.kwargs['slug'])
+        car = Car.objects.filter(category=category)
+        context = {
+            'object_list': car,
+            'category_title': category.danh_mục,
+            'category_description': category.mô_tả,
+            'category_image': category.image
+        }
+        return render(self.request, "car_list.html", context)
+
 def car_detail(request, id=None):
     detail = get_object_or_404(Car,id=id)
     context = {
@@ -58,7 +71,6 @@ def car_detail(request, id=None):
 
 def car_created(request):
     form = CarForm(request.POST or None, request.FILES or None)
-    
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -128,7 +140,8 @@ def order_detail(request, id=None):
     }
     return render(request, 'order_detail.html', context)
 
-def order_created(request):
+def order_created(request, *args, **kwargs):
+    # order = get_object_or_404(user_id = request.user.id)
     form = OrderForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -274,7 +287,6 @@ def customer_profile(request, id=None):
     }
     return render(request, 'profile.html', context)
 #-----------------Admin Section-----------------
-@user_passes_test(lambda u: u.is_superuser)
 def admin_car_list(request):
     car = Car.objects.order_by('-id')
 

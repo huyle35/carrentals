@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'system',
-    'accounts'
+    'accounts',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',   
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -102,8 +107,6 @@ DATABASES = {
     }
 }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -157,3 +160,22 @@ EMAIL_HOST_PASSWORD = 'ddknehhuuisreaps '
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = '<noreply@hoanggiathinh.com>'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+ )
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

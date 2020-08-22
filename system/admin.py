@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Car, Order, PrivateMsg, Quote, Customer
+from .models import Car, Order, PrivateMsg, Quote, Customer, Category
 # Register your models here.
 
 class CarAdmin(admin.ModelAdmin):
@@ -9,7 +9,9 @@ class CarAdmin(admin.ModelAdmin):
                     "tên_công_ty",
                     "số_ghế",
                     "giá_tham_khảo",
-                    "nội_dung",)
+                    "nội_dung",
+                    "danh_mục",
+                    )
                     
 class OrderAdmin(admin.ModelAdmin):
 
@@ -42,10 +44,18 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ("user",
                     "số_điện_thoại",
                     "địa_chỉ",
-                    )                   
+                    )
+
+class CategoryAdmin(admin.ModelAdmin):
+    
+    list_display = ("danh_mục",
+                    "mô_tả",
+                    "image",
+                    )                      
 
 admin.site.register(Car, CarAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(PrivateMsg, PrivateMsgAdmin)
 admin.site.register(Quote, QuoteAdmin)
 admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Category, CategoryAdmin)

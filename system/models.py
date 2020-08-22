@@ -2,14 +2,31 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from django.conf import settings
+from django.shortcuts import reverse
+
 
 # Create your models here.
 
 def uploaded_location(instance, filename):
     return ("%s/%s") %(instance.tên_xe,filename)
-    
+
+class Category(models.Model):
+    danh_mục = models.CharField(max_length=100)
+    slug = models.SlugField()
+    mô_tả = models.TextField()
+    image = models.ImageField()
+
+    def __str__(self):
+        return self.danh_mục
+
+    def get_absolute_url(self):
+        return reverse("system:category", kwargs={
+            'slug': self.slug
+        })
+ 
 class Car(models.Model):
     hình_ảnh = models.ImageField(null=True, blank=True, upload_to='')
+    danh_mục = models.ForeignKey(Category, on_delete=models.CASCADE)
     tên_xe = models.CharField(max_length=100)
     tên_công_ty = models.CharField(max_length=100)
     số_ghế = models.IntegerField()
@@ -22,7 +39,7 @@ class Car(models.Model):
 
     def get_absolute_url(self):
         return "/car/%s/" % (self.id)
-
+    
 class Quote(models.Model):
     số_điện_thoại = models.CharField(max_length=15)
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='quote_xe')
@@ -50,7 +67,7 @@ class PrivateMsg(models.Model):
 
 class Order(models.Model):
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='order')
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='order_customer', null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tên_khách_hàng = models.CharField(max_length=255)
     ngày_đi = models.DateTimeField()
     ngày_về = models.DateTimeField()

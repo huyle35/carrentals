@@ -17,6 +17,7 @@ class CarForm(forms.ModelForm):
             "số_ghế",
             "giá_tham_khảo",
             "nội_dung",
+            "danh_mục",
         ]
 class OrderForm(forms.ModelForm):
     tên_khách_hàng = forms.CharField(max_length=50, required=False)

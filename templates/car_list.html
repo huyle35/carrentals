@@ -205,8 +205,8 @@
         <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-share"></span> Đăng Nhập</a></li>
 {% endblock %}
 {% block body %}
-
 <div class="container" style="margin-top: 15px;">
+    {% comment %} <p><a href="{% url 'category' %}" class="btn btn-danger">Chi Tiết</a> {% endcomment %}
 <div class="row">
         {% for ob in car %}
 

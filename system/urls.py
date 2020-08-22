@@ -1,7 +1,8 @@
 from django.urls import path, include
 from django.contrib import admin
 from system.views import (home, car_list, order_created, car_update, car_detail, order_detail, 
-car_delete, order_delete, contact, newcar, like_update, popular_car, quote, customer_profile, profile_update)
+car_delete, order_delete, contact, newcar, like_update, popular_car, quote, customer_profile, 
+profile_update, CategoryView)
 
 urlpatterns = [
     path('carlist/', car_list, name = "car_list"),
@@ -23,5 +24,6 @@ urlpatterns = [
     path('quote/', quote, name = "quote"),
 
     path('update/', profile_update, name = "update_customer"),
+    path('category/', CategoryView.as_view(), name = "category"),
 
 ]
