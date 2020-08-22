@@ -69,6 +69,7 @@ class Order(models.Model):
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='order')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tên_khách_hàng = models.CharField(max_length=255)
+    email = models.EmailField()
     ngày_đi = models.DateTimeField()
     ngày_về = models.DateTimeField()
     xuất_phát = models.CharField(max_length=100)

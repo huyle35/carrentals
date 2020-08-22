@@ -35,6 +35,7 @@ class OrderForm(forms.ModelForm):
             "ngày_về",
             "xuất_phát",
             "điểm_đến",
+            "email",
         ]
 
 class MessageForm(forms.ModelForm):

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',   
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'social_django',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -78,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect', 
             ],
         },
     },
@@ -163,11 +166,29 @@ DEFAULT_FROM_EMAIL = '<noreply@hoanggiathinh.com>'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
  )
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-
+# LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+SOCIAL_AUTH_FACEBOOK_KEY = 343824923305005
+SOCIAL_AUTH_FACEBOOK_SECRET = "e2c58e28a20d83036509b13c006c0821"
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] 
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
+  'fields': 'id, name, email, picture.type(large), link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [

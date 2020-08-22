@@ -26,7 +26,9 @@ urlpatterns = [
     path('profile/', customer_profile, name='profile'),
     path('update/', profile_update, name = "update_customer"),
     path('admincustomer/', admin_customer, name='admincustomer'),
+    path('accounts/', include('allauth.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('social-auth/', include('social_django.urls', namespace="social")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

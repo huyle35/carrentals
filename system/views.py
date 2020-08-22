@@ -7,13 +7,16 @@ from .forms import CarForm, OrderForm, MessageForm, QuoteForm, ProfileForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import View
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings 
 
-
+@login_required
 def home(request):
     context = {
         "title" : "Hoàng Gia Thịnh"
     }
-    return render(request,'home.html', context)
+    return render(request,'login_social.html', context)
 
     form = MessageForm(request.POST or None)
     if form.is_valid():
@@ -140,19 +143,34 @@ def order_detail(request, id=None):
     }
     return render(request, 'order_detail.html', context)
 
-def order_created(request, *args, **kwargs):
-    # order = get_object_or_404(user_id = request.user.id)
+
+def order_created(request):
+
     form = OrderForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect(instance.get_absolute_url())
+        subject = "Hoàng Gia Thịnh - Xác nhận thuê xe"
+        message = f"""Xin chào {instance.tên_khách_hàng}. 
+    Chúng tôi đã xác nhận đơn thuê xe của bạn.
+        
 
+    Mọi thắc mắc xin liên hệ: 
+        + Email: info.hoanggiavn@gmail.com
+        + Số điện thoại: +09 38.358.309
+                    Hoặc: +09 38.100.229"""
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [instance.email]
+        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
+        return HttpResponseRedirect(instance.get_absolute_url())
+    
     context = {
         "form": form,
         "title": "Tạo đơn đặt xe"
     }
     return render(request, 'order_create.html', context)
+
+# connection.close()
 
 def order_update(request, id=None):
     detail = get_object_or_404(Order, id=id)
