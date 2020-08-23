@@ -3,12 +3,15 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from system.views import admin_car_list, admin_msg, admin_quote, order_list, car_created, order_update, order_delete, msg_delete, home, quote_delete, customer_profile, profile_update, admin_customer
-from accounts.views import (login_view, register_view, logout_view, login_admin)
+from system.views import (admin_car_list, admin_msg, admin_quote, order_list, car_created, 
+                            order_update, order_delete, msg_delete, home, quote_delete, 
+                            customer_profile, profile_update, admin_customer, export_users_xls,
+                            export_order_xls, export_car_xls, export_quote_xls)
+from accounts.views import (login_view, register_view, logout_view)
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin', admin.site.urls),
-    path('manage', login_admin, name='manage'),
     path('auth', admin_car_list, name='adminIndex'),
     path('', home, name = "home"),
     path('listOrder/', order_list, name = "order_list"),
@@ -29,6 +32,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('django.contrib.auth.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
+    path('export_user/xls/', export_users_xls, name='export_users_xls'),
+    path('export_order/xls/', export_order_xls, name='export_order_xls'),
+    path('export_car/xls/', export_car_xls, name='export_car_xls'),
+    path('export_quote/xls/', export_quote_xls, name='export_quote_xls'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

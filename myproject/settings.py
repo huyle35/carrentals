@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'django.contrib.sites',
     'allauth',
-    'allauth.account',   
+    'allauth.account',  
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'social_django',
@@ -169,18 +169,23 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.linkedin.LinkedinOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
  )
-
 SITE_ID = 1
-# LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = '/auth/login/google-oauth2/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/car/newcar/'
+LOGOUT_REDIRECT_URL = '/home/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '422047125319-lvh38ji2c58t7pjf3n5ltq9qnb5jh95e.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'T0X6aoHn0O8sNq_CcdZPWRa6'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 SOCIAL_AUTH_FACEBOOK_KEY = 343824923305005
 SOCIAL_AUTH_FACEBOOK_SECRET = "e2c58e28a20d83036509b13c006c0821"
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] 
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
   'fields': 'id, name, email, picture.type(large), link'
 }
 SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [

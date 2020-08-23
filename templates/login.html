@@ -239,11 +239,20 @@
     </form>
     <div class="row">
 </div>
- <div class ='col-sm-5 col-sm-offset-2'>
-         <button class="btn btn-group-vertical mb-2">
-            <a href="{% url 'social:begin' 'facebook' %}"> Đăng nhập với Facebook
-             </a>
-         </button>
-     </div>
- </div>
+<hr>
+<div class ='col-sm-5 col-sm-offset-3'>
+        <button class="btn btn-group-vertical mb-2">
+        <a href="{% url 'social:begin' 'facebook' %}"> Đăng nhập với Facebook
+            </a>
+        </button>
+    </div>
+  {% comment %} {% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }} !</p>
+ 
+  {% else %} {% endcomment %}
+  <button class="btn btn-group-vertical mb-2">
+  <a href="{% url 'social:begin' 'google-oauth2' %}">Đăng nhập với Google</a>
+  </button>
+  {% comment %} {% endif %} {% endcomment %}
+</div>
 {% endblock %}

@@ -2,6 +2,12 @@ from django import forms
 from .models import Car, Order, PrivateMsg, Quote, Customer
 from django.contrib.auth.models import User
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class DateForm(forms.Form):
+    date_field = forms.DateField(widget=DateInput(format="%d-%m-%Y"))
+
 class CarForm(forms.ModelForm):
     tên_xe = forms.CharField(required=True)
     tên_công_ty = forms.CharField(required=False)
@@ -21,8 +27,8 @@ class CarForm(forms.ModelForm):
         ]
 class OrderForm(forms.ModelForm):
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
-    ngày_đi = forms.DateField(required=True)
-    ngày_về = forms.DateField(required=True)
+    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
+    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
     xuất_phát = forms.CharField(required=True)
     điểm_đến = forms.CharField(required=True)
 
@@ -31,11 +37,11 @@ class OrderForm(forms.ModelForm):
         fields = [
             "tên_xe",
             "tên_khách_hàng",
-            "ngày_đi",
-            "ngày_về",
+            "email",
+            "ngày_đi","ngày_về",
             "xuất_phát",
             "điểm_đến",
-            "email",
+            "nhu_cầu_khác"
         ]
 
 class MessageForm(forms.ModelForm):
@@ -50,8 +56,8 @@ class MessageForm(forms.ModelForm):
 
 class QuoteForm(forms.ModelForm):
     số_điện_thoại = forms.IntegerField(required=True)
-    ngày_đi = forms.DateField(required=True, help_text="Ví dụ: 01/01/2020")
-    ngày_về = forms.DateField(required=True, help_text="Ví dụ: 01/01/2020")
+    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
+    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
     xuất_phát = forms.CharField(required=True)
     điểm_đến = forms.CharField(required=True)
 

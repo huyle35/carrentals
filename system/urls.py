@@ -24,6 +24,6 @@ urlpatterns = [
     path('quote/', quote, name = "quote"),
 
     path('update/', profile_update, name = "update_customer"),
-    path('category/', CategoryView.as_view(), name = "category"),
+    # path('category/', CategoryView.as_view(), name = "category"),
 
 ]

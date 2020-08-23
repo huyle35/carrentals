@@ -34,8 +34,10 @@
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
       </form>
       {% endblock %}
-
   <!-- Table -->
+  <div class="pull-right">
+    <a href="{% url 'export_order_xls' %}"><button type="button" class="btn btn-info">In thông tin thuê xe</button></a>
+  </div>
   <table class="table table-bordered table-striped table-hover">
    <tr>
     <td><strong>Số Thứ Tự</strong></td>
@@ -45,6 +47,7 @@
     <td><strong>Đến Ngày</strong></td>
     <td><strong>Xuất Phát</strong></td>
     <td><strong>Điểm Đến</strong></td>
+    <td><strong>Nhu Cầu Khác</strong></td>
     <td><strong>Chỉnh Sửa</strong></td>
   </tr>
     {% for ob in order %}
@@ -56,6 +59,7 @@
     <td>{{ob.ngày_về}}</td>
     <td>{{ob.xuất_phát}}</td>
     <td>{{ob.điểm_đến}}</td>
+    <td>{{ob.nhu_cầu_khác}}</td>
     <td>
          <a href="{% url 'order_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
          <a href="{% url 'order_delete' ob.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>

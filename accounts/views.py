@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from system.models import Car
 
 # Create your views here.
 from django.shortcuts import render, redirect
@@ -26,23 +27,10 @@ def login_view(request):
         username = form1.cleaned_data.get("username")
         password = form1.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
-        if not request.user.is_staff:
+        if request.user.is_active:
             login(request, user)
             return redirect("/car/newcar/")
     return render(request, "login.html", {"form": form1, "title": "Đăng Nhập"})
-
-@login_required
-def login_admin(request):
-    form2 = AdminLoginForm(request.POST or None)
-    if form2.is_valid():
-        username = form2.cleaned_data.get("username")
-        password = form2.cleaned_data.get("password")
-        user = authenticate(username=username, password=password)
-        if not request.user.is_superuser:
-            login(request, user)
-            return redirect("/auth")
-
-    return render(request, "login.html", {"form": form2, "title": "Đăng Nhập"})
 
 def register_view(request):
     if request.method == 'POST':
@@ -63,8 +51,10 @@ def register_view(request):
     return render(request, "register.html", context)
 
 def logout_view(request):
-    logout(request)
-    return render(request, "home.html", {})
-
-
+    car = Car.objects.order_by("-lượt_thích")[:4]
+    context = {
+        "title" : "Hoàng Gia Thịnh",
+        "car": car,
+    }
+    return render(request,'home.html', context)
 

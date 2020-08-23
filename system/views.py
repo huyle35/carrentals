@@ -10,20 +10,144 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings 
+import xlwt
 
-@login_required
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+def export_users_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="users.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Users')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['Username', 'First name', 'Last name', 'Email address', ]
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+def export_order_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="order.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Order')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['id', 'Tên Khách Hàng', 'Xe ID', 'Từ ngày', 'Đến ngày','Xuất phát', 'Điểm đến']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = Order.objects.all().values_list('id', 'tên_khách_hàng', 'tên_xe', 'ngày_đi', 'ngày_về', 'xuất_phát', 'điểm_đến')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+def export_car_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="car.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Car')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['id', 'Danh Mục', 'Tên xe', 'Tên Công Ty', 'Số Ghế','Giá Tham Khảo', 'Nội Dung', 'Lượt thích']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = Car.objects.all().values_list('id', 'danh_mục', 'tên_xe', 'tên_công_ty', 'số_ghế', 'giá_tham_khảo', 'nội_dung', 'lượt_thích')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+def export_quote_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="baogia.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('BaoGia')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['id', 'Số Điện Thoại', 'Xe ID', 'Từ ngày', 'Đến ngày','Xuất phát', 'Điểm đến']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = Quote.objects.all().values_list('id', 'số_điện_thoại', 'tên_xe', 'ngày_đi', 'ngày_về', 'xuất_phát', 'điểm_đến')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
 def home(request):
-    context = {
-        "title" : "Hoàng Gia Thịnh"
-    }
-    return render(request,'login_social.html', context)
-
+    car = Car.objects.order_by("-lượt_thích")[:4]
     form = MessageForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect("/car/carlist/")
-    return render(request,'home.html')
+        return HttpResponseRedirect("/contact/")
+    context = {
+        "form": form,
+        "title" : "Hoàng Gia Thịnh",
+        "car": car,
+    }
+    return render(request,'home.html', context)
 
 def car_list(request):
     car = Car.objects.all()
@@ -150,15 +274,18 @@ def order_created(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        subject = "Hoàng Gia Thịnh - Xác nhận thuê xe"
+        subject = "Hoàng Gia Thịnh"
         message = f"""Xin chào {instance.tên_khách_hàng}. 
     Chúng tôi đã xác nhận đơn thuê xe của bạn.
-        
+    Bạn đã đặt xe {instance.tên_xe}
+    Đi từ {instance.xuất_phát}
+    Đến {instance.điểm_đến}
+    Từ ngày {instance.ngày_đi} đến {instance.ngày_về}
 
     Mọi thắc mắc xin liên hệ: 
         + Email: info.hoanggiavn@gmail.com
         + Số điện thoại: +09 38.358.309
-                    Hoặc: +09 38.100.229"""
+                   Hoặc: +09 38.100.229"""
         from_email = settings.EMAIL_HOST_USER
         to_email = [instance.email]
         send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
@@ -305,6 +432,8 @@ def customer_profile(request, id=None):
     }
     return render(request, 'profile.html', context)
 #-----------------Admin Section-----------------
+
+@login_required
 def admin_car_list(request):
     car = Car.objects.order_by('-id')
 
@@ -333,6 +462,7 @@ def admin_car_list(request):
     }
     return render(request, 'admin_index.html', context)
 
+@login_required
 def admin_msg(request):
     msg = PrivateMsg.objects.order_by('-id')
     query = request.GET.get('q')
@@ -358,6 +488,7 @@ def admin_msg(request):
     }
     return render(request, 'admin_msg.html', context)
 
+@login_required
 def admin_quote(request):
     quote = Quote.objects.order_by('-id')
     query = request.GET.get('q')
@@ -383,6 +514,7 @@ def admin_quote(request):
     }
     return render(request, 'admin_quote.html', context)
 
+@login_required
 def admin_customer(request):
     profile = Customer.objects.order_by('-id')
     query = request.GET.get('q')

@@ -41,10 +41,10 @@ class Car(models.Model):
         return "/car/%s/" % (self.id)
     
 class Quote(models.Model):
-    số_điện_thoại = models.CharField(max_length=15)
+    số_điện_thoại = models.CharField(max_length=12)
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='quote_xe')
-    ngày_đi = models.DateTimeField()
-    ngày_về = models.DateTimeField()
+    ngày_đi = models.DateField()
+    ngày_về = models.DateField()
     xuất_phát = models.CharField(max_length=100)
     điểm_đến = models.CharField(max_length=100)
 
@@ -59,7 +59,7 @@ class Customer(models.Model):
 class PrivateMsg(models.Model):
     tên_người_dùng = models.CharField(max_length=100)
     email = models.EmailField()
-    số_điện_thoại = models.IntegerField(default=0000000000)
+    số_điện_thoại = models.CharField(max_length=12)
     nội_dung = models.TextField()
 
     def __str__(self):
@@ -70,10 +70,11 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tên_khách_hàng = models.CharField(max_length=255)
     email = models.EmailField()
-    ngày_đi = models.DateTimeField()
-    ngày_về = models.DateTimeField()
+    ngày_đi = models.DateField()
+    ngày_về = models.DateField()
     xuất_phát = models.CharField(max_length=100)
     điểm_đến = models.CharField(max_length=100)
+    nhu_cầu_khác = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.tên_xe

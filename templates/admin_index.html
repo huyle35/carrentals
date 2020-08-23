@@ -44,7 +44,11 @@
           <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
         </form>
 
+    {% if user.is_superuser %}
     <!-- Table -->
+  <div class="pull-right">
+    <a href="{% url 'export_car_xls' %}"><button type="button" class="btn btn-info">In thông tin xe</button></a>
+  </div>
     <table class="table table-bordered table-striped table-hover">
     <tr>
       <td><strong>Tên Xe</strong></td>
@@ -71,6 +75,7 @@
       {% endfor %}
   </tbody>
     </table>
+    {% endif %}
   <nav>
     <ul class="pager">
       <li class="previous">{% if car.has_previous %}
