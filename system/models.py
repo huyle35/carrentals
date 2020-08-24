@@ -12,17 +12,12 @@ def uploaded_location(instance, filename):
 
 class Category(models.Model):
     danh_mục = models.CharField(max_length=100)
-    slug = models.SlugField()
     mô_tả = models.TextField()
     image = models.ImageField()
 
     def __str__(self):
         return self.danh_mục
 
-    def get_absolute_url(self):
-        return reverse("system:category", kwargs={
-            'slug': self.slug
-        })
  
 class Car(models.Model):
     hình_ảnh = models.ImageField(null=True, blank=True, upload_to='')
