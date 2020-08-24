@@ -13,7 +13,7 @@ class CarForm(forms.ModelForm):
     tên_công_ty = forms.CharField(required=False)
     số_ghế = forms.IntegerField(required=True)
     giá_tham_khảo = forms.FloatField(required=True)
-    status =  forms.BooleanField(required=False)
+    status = forms.BooleanField(required=False)
 
     class Meta:
         model = Car
@@ -38,6 +38,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = [
+            "tên_xe",
             "tên_khách_hàng",
             "email",
             "ngày_đi",
