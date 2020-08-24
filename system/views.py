@@ -150,8 +150,7 @@ def home(request):
     return render(request,'home.html', context)
 
 def car_list(request):
-    car = Car.objects.all()
-
+    car = Car.objects.filter(status=True)
     query = request.GET.get('q')
     if query:
         car = car.filter(
@@ -273,14 +272,17 @@ def order_created(request):
     form = OrderForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
+        Car.objects.get(id=form.tên_xe)
         instance.save()
         subject = "Hoàng Gia Thịnh"
         message = f"""Xin chào {instance.tên_khách_hàng}. 
-    Chúng tôi đã xác nhận đơn thuê xe của bạn.
+    Chúng tôi đã nhận được đơn thuê xe của bạn.
     Bạn đã đặt xe {instance.tên_xe}
     Đi từ {instance.xuất_phát}
     Đến {instance.điểm_đến}
     Từ ngày {instance.ngày_đi} đến {instance.ngày_về}
+
+    --- Hoàng Gia Thịnh sẽ xác nhận đơn đặt xe của bạn sau khi thanh toán thành công ---
 
     Mọi thắc mắc xin liên hệ: 
         + Email: info.hoanggiavn@gmail.com
@@ -318,7 +320,7 @@ def order_delete(request,id=None):
     return render(request, 'order_delete.html')
 
 def newcar(request):
-    new = Car.objects.order_by('-id')
+    new = Car.objects.order_by('-id').filter(status=True)
     #seach
     query = request.GET.get('q')
     if query:
@@ -400,6 +402,23 @@ def quote(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        subject = "Hoàng Gia Thịnh"
+        message = f"""Xin chào số điện thoại: {instance.số_điện_thoại}. 
+    Chúng tôi đã nhận được tin nhắn báo giá của bạn.
+    Bạn đã đặt xe {instance.tên_xe}
+    Đi từ {instance.xuất_phát}
+    Đến {instance.điểm_đến}
+    Từ ngày {instance.ngày_đi} đến {instance.ngày_về}
+
+    --- Hoàng Gia Thịnh sẽ liên lạc cho trong thời gian sớm nhất.---
+
+    Mọi thắc mắc xin liên hệ: 
+        + Email: info.hoanggiavn@gmail.com
+        + Số điện thoại: +09 38.358.309
+                   Hoặc: +09 38.100.229"""
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [instance.email]
+        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
         return render(request,'quote_success.html')
     context = {
         "form": form,
@@ -433,7 +452,7 @@ def customer_profile(request, id=None):
     return render(request, 'profile.html', context)
 #-----------------Admin Section-----------------
 
-@login_required
+@login_required(login_url='/login/')
 def admin_car_list(request):
     car = Car.objects.order_by('-id')
 

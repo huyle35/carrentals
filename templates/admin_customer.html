@@ -21,6 +21,7 @@
   <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Khách Hàng</strong></h5> </div>
     <div class="panel-body">
   <!-- Table -->
+  {% if user.is_superuser %}
   <a href="{% url 'export_users_xls' %}"><button type="button" class="btn btn-info">In thông tin khách hàng</button></a>
      <!-- search box-->
       <form method="GET" class="navbar-form navbar-right" role="search">
@@ -29,7 +30,6 @@
         </div>
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
       </form>
-
   <!-- Table -->
   <table class="table table-bordered table-striped table-hover">
    <tr>
@@ -47,6 +47,7 @@
     {% endfor %}
 </tbody>
   </table>
+{% endif %}
 <nav>
   <ul class="pager">
     <li class="previous">{% if profile.has_previous %}

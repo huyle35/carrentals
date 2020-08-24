@@ -35,6 +35,8 @@
     <a href="{% url 'export_quote_xls' %}"><button type="button" class="btn btn-info">In thông báo giá</button></a>
   </div>
   <!-- Table -->
+
+  {% if user.is_superuser %}
   <table class="table table-bordered table-striped table-hover">
    <tr>
     <td><strong>Số Điện Thoại</strong></td>
@@ -61,6 +63,7 @@
     {% endfor %}
 </tbody>
   </table>
+  {% endif %}
 <nav>
   <ul class="pager">
     <li class="previous">{% if quote.has_previous %}

@@ -11,6 +11,7 @@ class CarAdmin(admin.ModelAdmin):
                     "giá_tham_khảo",
                     "nội_dung",
                     "danh_mục",
+                    "status"
                     )
                     
 class OrderAdmin(admin.ModelAdmin):

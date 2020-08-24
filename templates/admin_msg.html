@@ -31,6 +31,8 @@
         </div>
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
       </form>
+    
+    {% if user.is_superuser %}
   <!-- Table -->
   <table class="table table-bordered table-striped table-hover">
    <tr>
@@ -54,6 +56,7 @@
     {% endfor %}
 </tbody>
   </table>
+  {% endif %}
 <nav>
   <ul class="pager">
     <li class="previous">{% if msg.has_previous %}

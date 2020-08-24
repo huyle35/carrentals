@@ -13,6 +13,7 @@ class CarForm(forms.ModelForm):
     tên_công_ty = forms.CharField(required=False)
     số_ghế = forms.IntegerField(required=True)
     giá_tham_khảo = forms.FloatField(required=True)
+    status =  forms.BooleanField(required=False)
 
     class Meta:
         model = Car
@@ -24,7 +25,9 @@ class CarForm(forms.ModelForm):
             "giá_tham_khảo",
             "nội_dung",
             "danh_mục",
+            "status"
         ]
+        
 class OrderForm(forms.ModelForm):
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
     ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
@@ -35,10 +38,10 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = [
-            "tên_xe",
             "tên_khách_hàng",
             "email",
-            "ngày_đi","ngày_về",
+            "ngày_đi",
+            "ngày_về",
             "xuất_phát",
             "điểm_đến",
             "nhu_cầu_khác"
@@ -66,6 +69,7 @@ class QuoteForm(forms.ModelForm):
         fields = [
             "số_điện_thoại",
             "tên_xe",
+            "email",
             "ngày_đi",
             "ngày_về",
             "xuất_phát",

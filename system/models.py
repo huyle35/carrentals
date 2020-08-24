@@ -33,6 +33,7 @@ class Car(models.Model):
     giá_tham_khảo = models.FloatField(max_length=50)
     nội_dung = models.TextField()
     lượt_thích = models.IntegerField(default=0)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.tên_xe
@@ -43,6 +44,7 @@ class Car(models.Model):
 class Quote(models.Model):
     số_điện_thoại = models.CharField(max_length=12)
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='quote_xe')
+    email = models.EmailField()
     ngày_đi = models.DateField()
     ngày_về = models.DateField()
     xuất_phát = models.CharField(max_length=100)
@@ -50,7 +52,7 @@ class Quote(models.Model):
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer', null=True, blank=True)
-    số_điện_thoại = models.IntegerField()
+    số_điện_thoại = models.CharField(max_length=12)
     địa_chỉ = models.TextField()
 
     def __str__(self):
