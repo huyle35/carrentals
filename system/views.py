@@ -272,7 +272,6 @@ def order_created(request):
     form = OrderForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
-        Car.objects.get(id=form.tên_xe)
         instance.save()
         subject = "Hoàng Gia Thịnh"
         message = f"""Xin chào {instance.tên_khách_hàng}. 
