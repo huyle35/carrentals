@@ -254,6 +254,22 @@
       <span class="sr-only">Trang sau</span>
     </a>
   </div>
+<div id="fb-root"></div>
+      <script src="http://connect.facebook.net/en_US/all.js"></script>
+      <script>
+         FB.init({ 
+            appId:'114322105313139', cookie:true,
+            status:true, xfbml:true 
+         });
+      </script>
+
+  <fb:login-button>Login with Facebook</fb:login-button>
+
+ <a href="http://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8009{{ request.get_full_path|urlencode }}"></a>
+
+  
+
+{% comment %} <a href="{% url '/www.facebook.com/hoanggiathinhlimousine' %}"><button type="button" class="fa fa-facebook-official">Facbook</button></a> {% endcomment %}
 
 <!-- List Car -->
 <br>
@@ -279,7 +295,7 @@
             </p>
               <div class="pull-right">
             <p><a href="{% url 'car_detail' ob.id %}" class="btn btn-primary" role="button">Chi Tiết</a>
-            <a href="{% url 'order_create' %}" class="btn btn-danger" role="button">Đặt Xe</a></p>
+            <a href="{% url 'order_creates' ob.id  %}" class="btn btn-danger" role="button">Đặt Xe</a></p>
               </div>
           </div>
         </div>
@@ -382,7 +398,7 @@ Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc c�
       <br><br><span style="font-style:normal;">Chị Nguyễn Thùy Trang / Q9</span></h4>
       </div>
     </div>
-
+  
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -394,6 +410,7 @@ Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc c�
     </a>
   </div>
 </div>
+
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
@@ -426,6 +443,134 @@ Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc c�
   </div>
 </div>
 
+<div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <h2 class="section-heading"><strong>Hoạt Động - Tin Tức</strong></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="testimonial-2">
+              <blockquote class="mb-4">
+              <h3><span>Thuê xe 45 chỗ đi Đà Lạt giá rẻ uy tín tại Hoàng Gia Thịnh</span></h3 >
+                <p>"Hoàng Gia Thịnh chuyên cho thuê xe 45 chỗ đi Đà Lạt đảm bảo chất lượng, uy tín với giá thành hợp lý. Xe 45 chỗ đầy đủ, tiện nghi với các trang thiết bị hiện đại nhất giúp khách hàng có chuyến đi thoải mái. Thuê xe du lịch Đà Lạt là dịch vụ […]"</p>
+              </blockquote>
+              <div class="d-flex v-card align-items-center">
+              {% comment %} <a href="{% url 'thuexeviphoanggia.com/thue-xe-45-cho-di-da-lat/' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a> {% endcomment %}
+                {% comment %} <img src="{% static 'images/tin1.jpg' %}" alt="Image" class="img-fluid mr-3"> {% endcomment %}
+                <div class="author-name">
+              
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="testimonial-2">
+              <blockquote class="mb-4">
+              <h3><span>Thuê xe 45 chỗ đi Đà Lạt giá rẻ uy tín tại Hoàng Gia Thịnh</span></h3 >
+                <p>"Hoàng Gia Thịnh chuyên cho thuê xe 45 chỗ đi Đà Lạt đảm bảo chất lượng, uy tín với giá thành hợp lý. Xe 45 chỗ đầy đủ, tiện nghi với các trang thiết bị hiện đại nhất giúp khách hàng có chuyến đi thoải mái. Thuê xe du lịch Đà Lạt là dịch vụ […]"</p>
+              </blockquote>
+              <div class="d-flex v-card align-items-center">
+                {% comment %} <img src="{% static 'images/tin1.jpg' %}" alt="Image" class="img-fluid mr-3"> {% endcomment %}
+                <div class="author-name">
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="testimonial-2">
+              <blockquote class="mb-4">
+              <h3><span>Thuê xe 45 chỗ đi Đà Lạt giá rẻ uy tín tại Hoàng Gia Thịnh</span></h3 >
+                <p>"Hoàng Gia Thịnh chuyên cho thuê xe 45 chỗ đi Đà Lạt đảm bảo chất lượng, uy tín với giá thành hợp lý. Xe 45 chỗ đầy đủ, tiện nghi với các trang thiết bị hiện đại nhất giúp khách hàng có chuyến đi thoải mái. Thuê xe du lịch Đà Lạt là dịch vụ […]"</p>
+              </blockquote>
+              <div class="d-flex v-card align-items-center">
+                {% comment %} <img src="{% static 'images/tin1.jpg' %}" alt="Image" class="img-fluid mr-3"> {% endcomment %}
+                <div class="author-name">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} 
+    <div class="site-section bg-primary py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-7 mb-4 mb-md-0">
+            <h2 class="mb-0 text-white">What are you waiting for?</h2>
+            <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+          </div>
+          <div class="col-lg-5 text-md-right">
+            <a href="#" class="btn btn-primary btn-white">Rent a car now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+       {% endcomment %}
+      <footer class="site-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <h2 class="footer-heading mb-4">About Us</h2>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+              <ul class="list-unstyled social">
+                <li><a href="#"><span class="icon-facebook"></span></a></li>
+                <li><a href="#"><span class="icon-instagram"></span></a></li>
+                <li><a href="#"><span class="icon-twitter"></span></a></li>
+                <li><a href="#"><span class="icon-linkedin"></span></a></li>
+              </ul>
+            </div>
+            <div class="col-lg-8 ml-auto">
+              <div class="row">
+                <div class="col-lg-3">
+                  <h2 class="footer-heading mb-4">Quick Links</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-3">
+                  <h2 class="footer-heading mb-4">Resources</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-3">
+                  <h2 class="footer-heading mb-4">Support</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-3">
+                  <h2 class="footer-heading mb-4">Company</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
 <script>
 $(document).ready(function(){

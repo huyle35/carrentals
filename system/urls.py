@@ -1,12 +1,13 @@
 from django.urls import path, include
 from django.contrib import admin
-from system.views import (home, car_list, order_created, car_update, car_detail, order_detail, 
+from system.views import (home, car_list, order_created, car_update, car_detail, order_detail, order_created2,
 car_delete, order_delete, contact, newcar, like_update, popular_car, quote, customer_profile, 
 profile_update, CategoryView)
 
 urlpatterns = [
     path('carlist/', car_list, name = "car_list"),
-    path('createOrder/', order_created, name = "order_create"),
+    path('createOrder', order_created2, name = "order_create"),
+    path('createOrder/<car_id>', order_created, name = "order_creates"),
 
     path('(<id>)/edit/', car_update, name = "car_edit"),
 

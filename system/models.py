@@ -64,7 +64,7 @@ class PrivateMsg(models.Model):
         return str(self.tên_người_dùng)
 
 class Order(models.Model):
-    title_xe = models.IntegerField()
+    title_xe = models.CharField(max_length=100)
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='order')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tên_khách_hàng = models.CharField(max_length=255)

@@ -2,6 +2,10 @@
 from django import forms
 from .models import Car, Order, PrivateMsg, Quote, Customer
 from django.contrib.auth.models import User
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -31,24 +35,12 @@ class CarForm(forms.ModelForm):
         
 class OrderForm(forms.ModelForm):
     # tên_xe = forms.IntegerField(widget=forms.HiddenInput(), initial=1)
-    defaultcar = Car.objects.get(id=1)
+    # defaultcar = Car.objects.get(id=1)
     # # form = OrderForm(initial={''})
-    CHOICES = [('1',Car.objects.get(id=1).tên_xe), 
-                ('34',Car.objects.get(id=34).tên_xe),
-                ('35',Car.objects.get(id=35).tên_xe),
-                ('36',Car.objects.get(id=36).tên_xe),
-                ('37',Car.objects.get(id=37).tên_xe),
-                ('40',Car.objects.get(id=40).tên_xe),
-                ('41',Car.objects.get(id=41).tên_xe),
-                ('42',Car.objects.get(id=42).tên_xe),
-                ('43',Car.objects.get(id=43).tên_xe),
-                ('44',Car.objects.get(id=44).tên_xe),
-                ('45',Car.objects.get(id=45).tên_xe),
-                ('46',Car.objects.get(id=46).tên_xe)]
-    title_xe = forms.ChoiceField(choices=CHOICES)
-    
-    tilte_xe.choices = CHOICES    
-    tên_xe = Car.objects.get(id=1)
+    # CHOICES = [('1', Car.objects.get(id=int))]
+    # title_xe = forms.ChoiceField(choices=CHOICES)
+    # tilte_xe.choices =[('1',Car.objects.get(id=1).tên_xe)]
+    # tên_xe = Car
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
     ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
     ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
@@ -58,7 +50,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = [
-            "title_xe",
+            "tên_xe",
             "tên_khách_hàng",
             "email",
             "ngày_đi",

@@ -267,7 +267,40 @@ def order_detail(request, id=None):
     return render(request, 'order_detail.html', context)
 
 
-def order_created(request):
+def order_created(request, car_id=None):
+
+    # form = OrderForm(request.POST or None)
+    order = Order(tên_xe=Car.objects.get(id=car_id))
+    form = OrderForm(request.POST or None, instance=order)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        subject = "Hoàng Gia Thịnh"
+        message = f"""Xin chào {instance.tên_khách_hàng}. 
+    Chúng tôi đã nhận được đơn thuê xe của bạn.
+    Bạn đã đặt xe {instance.tên_xe}
+    Đi từ {instance.xuất_phát}
+    Đến {instance.điểm_đến}
+    Từ ngày {instance.ngày_đi} đến {instance.ngày_về}
+
+    --- Hoàng Gia Thịnh sẽ xác nhận đơn đặt xe của bạn sau khi thanh toán thành công ---
+
+    Mọi thắc mắc xin liên hệ: 
+        + Email: info.hoanggiavn@gmail.com
+        + Số điện thoại: +09 38.358.309
+                   Hoặc: +09 38.100.229"""
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [instance.email]
+        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
+        return HttpResponseRedirect(instance.get_absolute_url())
+    
+    context = {
+        "form": form,
+        "title": "Tạo đơn đặt xe"
+    }
+    return render(request, 'order_create.html', context)
+
+def order_created2(request):
 
     form = OrderForm(request.POST or None)
     if form.is_valid():
