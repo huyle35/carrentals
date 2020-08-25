@@ -45,8 +45,9 @@ class OrderForm(forms.ModelForm):
                 ('44',Car.objects.get(id=44).tên_xe),
                 ('45',Car.objects.get(id=45).tên_xe),
                 ('46',Car.objects.get(id=46).tên_xe)]
-    # title_xe = forms.ChoiceField(choices=CHOICES)
-    # tilte_xe.choices = CHOICES    
+    title_xe = forms.ChoiceField(choices=CHOICES)
+    
+    tilte_xe.choices = CHOICES    
     tên_xe = Car.objects.get(id=1)
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
     ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
