@@ -196,51 +196,46 @@
   }
   </style>
 </head>
-<br><br>
-<body>
-<nav class="navbar navbar-custom navbar-fixed-top">
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="glyphicon glyphicon-align-justify"></span>
+
       </button>
-      <div class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Hoàng Gia Thịnh</div>
+      <a class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Hoàng Gia Thịnh</a>
     </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-         <li>
-    {% block nav %}
-        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
-        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
-        <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
-        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Trang Chủ</a></li>
-    {% endblock %}
+        <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a></li>
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Đăng Nhập</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 {% block body %}
+<br><br><br>
 <div class ='col-sm-6 col-sm-offset-3'>
-  <strong><p style="color: red">
-      Chúng tôi đã gửi 1 mail đến bạn và sẽ liên hệ với bạn sớm nhất có thể !<br>
-      Chi tiết về đơn đặt xe của bạn:
-  </p></strong>
-  <p class="list-group-item active">
-    <strong><span class="glyphicon glyphicon-tag"></span> Thông Tin Đặt Xe </strong>
-  </p>
-  <a href="" class="list-group-item"><strong>Tên Xe: </strong>{{detail.tên_xe}}</a>
-  <a href="" class="list-group-item"><strong>Tên Khách Hàng: </strong>{{detail.tên_khách_hàng}}</a>
-  <a href="" class="list-group-item"><strong>Từ Ngày: </strong>{{detail.ngày_đi}}</a>
-  <a href="" class="list-group-item"><strong>Đến Ngày: </strong>{{detail.ngày_về}}</a>
-  <a href="" class="list-group-item"><strong>Đi từ: </strong>{{detail.xuất_phát}}</a>
-  <a href="" class="list-group-item"><strong>Đến: </strong>{{detail.điểm_đến}}</a>
-  <a href="" class="list-group-item"><strong>Số thứ tự: </strong>{{detail.id}}</a><br>
-      <div class="pull-right">
-        <a href="{% url 'order_edit' detail.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Chỉnh Sửa</button></a>
-        <a href="{% url 'order_delete' detail.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Hủy Bỏ</button></a>
-      </div>
+    <hr>
+      <strong><p style="color: red">
+        Tin nhắn của bạn đã gửi thành công đến công ty. Nhân Viên Sẽ Liên Lạc Bạn Sau Vài Phút !
+      </p></strong>
+    <hr>
+    <div id="contact" class="container-fluid bg-grey">
+  <h2 class="text-center" >MỌI THẮC MẮC XIN LIÊN HỆ</h2>
+  <div class="row">
+    <div class="col-sm-20">
+      <p>Chúng tôi sẽ phản hồi bạn trong vòng 24 giờ (từ lúc bạn gửi Email)</p>
+      <p ><span class="glyphicon glyphicon-map-marker"></span> TP. Hồ Chí Minh, Việt Nam</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +09 38.358.309</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +09 38.100.229</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> info.hoanggiavn@gmail.com</p>
+    </div>
   </div>
+</div>
 </div>
 
 {% endblock %}

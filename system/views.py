@@ -389,7 +389,7 @@ def contact(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect("/car/newcar/")
+        return render(request,'msg_success.html')
     context = {
         "form": form,
         "title": "Liên Hệ",
