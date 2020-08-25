@@ -42,8 +42,8 @@ class OrderForm(forms.ModelForm):
     # tilte_xe.choices =[('1',Car.objects.get(id=1).tên_xe)]
     # tên_xe = Car
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
-    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
-    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
+    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
+    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
     xuất_phát = forms.CharField(required=True)
     điểm_đến = forms.CharField(required=True)
 
@@ -72,8 +72,8 @@ class MessageForm(forms.ModelForm):
 
 class QuoteForm(forms.ModelForm):
     số_điện_thoại = forms.IntegerField(required=True)
-    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
-    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: tháng / ngày / năm")
+    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
+    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
     xuất_phát = forms.CharField(required=True)
     điểm_đến = forms.CharField(required=True)
 
