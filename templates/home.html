@@ -253,21 +253,7 @@
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Trang sau</span>
     </a>
-  </div>
-<div id="fb-root"></div>
-      <script src="http://connect.facebook.net/en_US/all.js"></script>
-      <script>
-         FB.init({ 
-            appId:'114322105313139', cookie:true,
-            status:true, xfbml:true 
-         });
-      </script>
-
-  <fb:login-button>Login with Facebook</fb:login-button>
-
- <a href="http://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8009{{ request.get_full_path|urlencode }}"></a>
-
-  
+  </div>  
 
 {% comment %} <a href="{% url '/www.facebook.com/hoanggiathinhlimousine' %}"><button type="button" class="fa fa-facebook-official">Facbook</button></a> {% endcomment %}
 
@@ -443,129 +429,45 @@ Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc c�
   </div>
 </div>
 
-<div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7">
-            <h2 class="section-heading"><strong>Hoạt Động - Tin Tức</strong></h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="testimonial-2">
-              <blockquote class="mb-4">
-              <h3><span>Thuê xe 45 chỗ đi Đà Lạt giá rẻ uy tín tại Hoàng Gia Thịnh</span></h3 >
-                <p>"Hoàng Gia Thịnh chuyên cho thuê xe 45 chỗ đi Đà Lạt đảm bảo chất lượng, uy tín với giá thành hợp lý. Xe 45 chỗ đầy đủ, tiện nghi với các trang thiết bị hiện đại nhất giúp khách hàng có chuyến đi thoải mái. Thuê xe du lịch Đà Lạt là dịch vụ […]"</p>
-              </blockquote>
-              <div class="d-flex v-card align-items-center">
-              {% comment %} <a href="{% url 'thuexeviphoanggia.com/thue-xe-45-cho-di-da-lat/' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a> {% endcomment %}
-                {% comment %} <img src="{% static 'images/tin1.jpg' %}" alt="Image" class="img-fluid mr-3"> {% endcomment %}
-                <div class="author-name">
-              
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="testimonial-2">
-              <blockquote class="mb-4">
-              <h3><span>Thuê xe 45 chỗ đi Đà Lạt giá rẻ uy tín tại Hoàng Gia Thịnh</span></h3 >
-                <p>"Hoàng Gia Thịnh chuyên cho thuê xe 45 chỗ đi Đà Lạt đảm bảo chất lượng, uy tín với giá thành hợp lý. Xe 45 chỗ đầy đủ, tiện nghi với các trang thiết bị hiện đại nhất giúp khách hàng có chuyến đi thoải mái. Thuê xe du lịch Đà Lạt là dịch vụ […]"</p>
-              </blockquote>
-              <div class="d-flex v-card align-items-center">
-                {% comment %} <img src="{% static 'images/tin1.jpg' %}" alt="Image" class="img-fluid mr-3"> {% endcomment %}
-                <div class="author-name">
-                 
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="testimonial-2">
-              <blockquote class="mb-4">
-              <h3><span>Thuê xe 45 chỗ đi Đà Lạt giá rẻ uy tín tại Hoàng Gia Thịnh</span></h3 >
-                <p>"Hoàng Gia Thịnh chuyên cho thuê xe 45 chỗ đi Đà Lạt đảm bảo chất lượng, uy tín với giá thành hợp lý. Xe 45 chỗ đầy đủ, tiện nghi với các trang thiết bị hiện đại nhất giúp khách hàng có chuyến đi thoải mái. Thuê xe du lịch Đà Lạt là dịch vụ […]"</p>
-              </blockquote>
-              <div class="d-flex v-card align-items-center">
-                {% comment %} <img src="{% static 'images/tin1.jpg' %}" alt="Image" class="img-fluid mr-3"> {% endcomment %}
-                <div class="author-name">
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-{% comment %} 
-    <div class="site-section bg-primary py-5">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-7 mb-4 mb-md-0">
-            <h2 class="mb-0 text-white">What are you waiting for?</h2>
-            <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
-          </div>
-          <div class="col-lg-5 text-md-right">
-            <a href="#" class="btn btn-primary btn-white">Rent a car now</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
-       {% endcomment %}
       <footer class="site-footer">
         <div class="container">
           <div class="row">
-            <div class="col-lg-3">
-              <h2 class="footer-heading mb-4">About Us</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+            <div class="col-lg-4">
+              <h2 class="footer-heading mb-4">Hoàng Gia Thịnh</h2>
+              <p>Tự tin mang lại cho Quý khách những chuyến đi thật hài lòng, hoàn mỹ trọn vẹn.</p>
               <ul class="list-unstyled social">
                 <li><a href="#"><span class="icon-facebook"></span></a></li>
                 <li><a href="#"><span class="icon-instagram"></span></a></li>
-                <li><a href="#"><span class="icon-twitter"></span></a></li>
-                <li><a href="#"><span class="icon-linkedin"></span></a></li>
+                <p>Trụ sở chính: 778 Quốc lộ 1A, Khu Phố 4, P. An Phú Đông, Quận 12, TP.HCM</p>
+                <p>(Giờ giao dịch: 8h00 – 17h00 từ thứ 2 – thứ 7)</p>
               </ul>
             </div>
             <div class="col-lg-8 ml-auto">
               <div class="row">
-                <div class="col-lg-3">
-                  <h2 class="footer-heading mb-4">Quick Links</h2>
+                <div class="col-lg-4">
+                  <h2 class="footer-heading mb-4">Truy Cập Nhanh</h2>
                   <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</a></li>
+                    <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-info-sign"></span> Báo Giá</a></li>
+                    <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
+                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-share"></span> Đăng Nhập</a></li>
                   </ul>
                 </div>
-                <div class="col-lg-3">
-                  <h2 class="footer-heading mb-4">Resources</h2>
+                <div class="col-lg-4">
+                  <h2 class="footer-heading mb-4">Hỗ Trợ</h2>
                   <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <p>Tel: 02866.800.456</p>
+                    <p>Hotline:  0938.358.309 (Zalo, Phone)</p>
+                    <li><a href="{% url 'contact' %}"> Liên Hệ</a></li>
                   </ul>
                 </div>
-                <div class="col-lg-3">
-                  <h2 class="footer-heading mb-4">Support</h2>
+                <div class="col-lg-4">
+                  <h2 class="footer-heading mb-4">Công Ty</h2>
                   <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                  </ul>
-                </div>
-                <div class="col-lg-3">
-                  <h2 class="footer-heading mb-4">Company</h2>
-                  <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#about">Giới Thiệu</a></li>
+                    <li><a href="#services">Dịch Vụ</a></li>
+                    <li><a href="#contact">Liên Hệ</a></li>
                   </ul>
                 </div>
               </div>

@@ -72,7 +72,6 @@ class MessageForm(forms.ModelForm):
         ]
 
 class QuoteForm(forms.ModelForm):
-    số_điện_thoại = forms.IntegerField(required=True)
     ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
     ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
     xuất_phát = forms.CharField(required=True)
