@@ -3,6 +3,7 @@
 {% block nav %}
         <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
         <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
+        <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-star"></span> Báo Giá</a></li>
         <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Đăng Xuất {{request.user.username}}</a></li>
         <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-info-sign"></span> Thông tin {{request.user}}</a></li>\

@@ -52,6 +52,7 @@ class OrderForm(forms.ModelForm):
         fields = [
             "tên_xe",
             "tên_khách_hàng",
+            "số_điện_thoại",
             "email",
             "ngày_đi",
             "ngày_về",
