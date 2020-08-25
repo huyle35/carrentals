@@ -22,6 +22,7 @@ class OrderAdmin(admin.ModelAdmin):
                     "ngày_về",
                     "xuất_phát",
                     "điểm_đến",
+                    "nhu_cầu_khác",
                     )
 
 class PrivateMsgAdmin(admin.ModelAdmin):
@@ -38,7 +39,10 @@ class QuoteAdmin(admin.ModelAdmin):
                     "ngày_đi",
                     "ngày_về",
                     "xuất_phát",
-                    "điểm_đến",)      
+                    "điểm_đến",  
+                    "nhu_cầu_khác",
+
+                    )      
 
 class CustomerAdmin(admin.ModelAdmin):
     

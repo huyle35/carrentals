@@ -44,6 +44,7 @@ class Quote(models.Model):
     ngày_về = models.DateField()
     xuất_phát = models.CharField(max_length=100)
     điểm_đến = models.CharField(max_length=100)
+    nhu_cầu_khác = models.CharField(max_length=255, blank=True, null=True)
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer', null=True, blank=True)
@@ -63,6 +64,7 @@ class PrivateMsg(models.Model):
         return str(self.tên_người_dùng)
 
 class Order(models.Model):
+    title_xe = models.IntegerField()
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='order')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tên_khách_hàng = models.CharField(max_length=255)
