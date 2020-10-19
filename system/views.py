@@ -1,26 +1,27 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse , HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
-from .models import Car, Order, PrivateMsg, User, Quote, Customer, Category
-from .forms import CarForm, OrderForm, MessageForm, QuoteForm, ProfileForm
+from .models import Car, Order, PrivateMsg, User, Quote, Customer, Category, Blog
+from .forms import CarForm, OrderForm, MessageForm, QuoteForm, ProfileForm, BlogForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.conf import settings 
+from django.conf import settings
 import xlwt
 
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
-def export_users_xls(request):
-    response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="users.xls"'
 
-    wb = xlwt.Workbook(encoding='utf-8')
-    ws = wb.add_sheet('Users')
+def export_users_xls(request):
+    response = HttpResponse(content_type="application/ms-excel")
+    response["Content-Disposition"] = 'attachment; filename="users.xls"'
+
+    wb = xlwt.Workbook(encoding="utf-8")
+    ws = wb.add_sheet("Users")
 
     # Sheet header, first row
     row_num = 0
@@ -28,7 +29,12 @@ def export_users_xls(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['Username', 'First name', 'Last name', 'Email address', ]
+    columns = [
+        "Username",
+        "First name",
+        "Last name",
+        "Email address",
+    ]
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
@@ -36,7 +42,9 @@ def export_users_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
+    rows = User.objects.all().values_list(
+        "username", "first_name", "last_name", "email"
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -44,13 +52,14 @@ def export_users_xls(request):
 
     wb.save(response)
     return response
+
 
 def export_order_xls(request):
-    response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="order.xls"'
+    response = HttpResponse(content_type="application/ms-excel")
+    response["Content-Disposition"] = 'attachment; filename="order.xls"'
 
-    wb = xlwt.Workbook(encoding='utf-8')
-    ws = wb.add_sheet('Order')
+    wb = xlwt.Workbook(encoding="utf-8")
+    ws = wb.add_sheet("Order")
 
     # Sheet header, first row
     row_num = 0
@@ -58,7 +67,15 @@ def export_order_xls(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['id', 'Tên Khách Hàng', 'Xe ID', 'Từ ngày', 'Đến ngày','Xuất phát', 'Điểm đến']
+    columns = [
+        "id",
+        "Tên Khách Hàng",
+        "Xe ID",
+        "Từ ngày",
+        "Đến ngày",
+        "Xuất phát",
+        "Điểm đến",
+    ]
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
@@ -66,7 +83,9 @@ def export_order_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = Order.objects.all().values_list('id', 'tên_khách_hàng', 'tên_xe', 'ngày_đi', 'ngày_về', 'xuất_phát', 'điểm_đến')
+    rows = Order.objects.all().values_list(
+        "id", "tên_khách_hàng", "tên_xe", "ngày_đi", "ngày_về", "xuất_phát", "điểm_đến"
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -74,13 +93,14 @@ def export_order_xls(request):
 
     wb.save(response)
     return response
+
 
 def export_car_xls(request):
-    response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="car.xls"'
+    response = HttpResponse(content_type="application/ms-excel")
+    response["Content-Disposition"] = 'attachment; filename="car.xls"'
 
-    wb = xlwt.Workbook(encoding='utf-8')
-    ws = wb.add_sheet('Car')
+    wb = xlwt.Workbook(encoding="utf-8")
+    ws = wb.add_sheet("Car")
 
     # Sheet header, first row
     row_num = 0
@@ -88,7 +108,16 @@ def export_car_xls(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['id', 'Danh Mục', 'Tên xe', 'Tên Công Ty', 'Số Ghế','Giá Tham Khảo', 'Nội Dung', 'Lượt thích']
+    columns = [
+        "id",
+        "Danh Mục",
+        "Tên xe",
+        "Tên Công Ty",
+        "Số Ghế",
+        "Giá Tham Khảo",
+        "Nội Dung",
+        "Lượt thích",
+    ]
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
@@ -96,7 +125,16 @@ def export_car_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = Car.objects.all().values_list('id', 'danh_mục', 'tên_xe', 'tên_công_ty', 'số_ghế', 'giá_tham_khảo', 'nội_dung', 'lượt_thích')
+    rows = Car.objects.all().values_list(
+        "id",
+        "danh_mục",
+        "tên_xe",
+        "tên_công_ty",
+        "số_ghế",
+        "giá_tham_khảo",
+        "nội_dung",
+        "lượt_thích",
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -104,13 +142,14 @@ def export_car_xls(request):
 
     wb.save(response)
     return response
+
 
 def export_quote_xls(request):
-    response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="baogia.xls"'
+    response = HttpResponse(content_type="application/ms-excel")
+    response["Content-Disposition"] = 'attachment; filename="baogia.xls"'
 
-    wb = xlwt.Workbook(encoding='utf-8')
-    ws = wb.add_sheet('BaoGia')
+    wb = xlwt.Workbook(encoding="utf-8")
+    ws = wb.add_sheet("BaoGia")
 
     # Sheet header, first row
     row_num = 0
@@ -118,7 +157,15 @@ def export_quote_xls(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['id', 'Số Điện Thoại', 'Xe ID', 'Từ ngày', 'Đến ngày','Xuất phát', 'Điểm đến']
+    columns = [
+        "id",
+        "Số Điện Thoại",
+        "Xe ID",
+        "Từ ngày",
+        "Đến ngày",
+        "Xuất phát",
+        "Điểm đến",
+    ]
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
@@ -126,7 +173,9 @@ def export_quote_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = Quote.objects.all().values_list('id', 'số_điện_thoại', 'tên_xe', 'ngày_đi', 'ngày_về', 'xuất_phát', 'điểm_đến')
+    rows = Quote.objects.all().values_list(
+        "id", "số_điện_thoại", "tên_xe", "ngày_đi", "ngày_về", "xuất_phát", "điểm_đến"
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -134,6 +183,7 @@ def export_quote_xls(request):
 
     wb.save(response)
     return response
+
 
 def home(request):
     car = Car.objects.order_by("-lượt_thích")[:4]
@@ -142,27 +192,31 @@ def home(request):
         instance = form.save(commit=False)
         instance.save()
         return HttpResponseRedirect("/contact/")
+
+    blog = Blog.objects.all()
     context = {
         "form": form,
-        "title" : "Hoàng Gia Thịnh",
+        "title": "Hoàng Gia Thịnh",
         "car": car,
+        "blog": blog,
     }
-    return render(request,'home.html', context)
+    return render(request, "home.html", context)
+
 
 def car_list(request):
     car = Car.objects.filter(status=True)
-    query = request.GET.get('q')
+    query = request.GET.get("q")
     if query:
         car = car.filter(
-                     Q(tên_xe__icontains=query) |
-                     Q(tên_công_ty__icontains = query) |
-                     Q(số_ghế__icontains=query) |
-                     Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
     paginator = Paginator(car, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         car = paginator.page(page)
     except PageNotAnInteger:
@@ -172,28 +226,29 @@ def car_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         car = paginator.page(paginator.num_pages)
     context = {
-        'car': car,
+        "car": car,
     }
-    return render(request, 'car_list.html', context)
+    return render(request, "car_list.html", context)
+
 
 class CategoryView(View):
     def get(self, *args, **kwargs):
-        category = Category.objects.get(slug=self.kwargs['slug'])
+        category = Category.objects.get(slug=self.kwargs["slug"])
         car = Car.objects.filter(category=category)
         context = {
-            'object_list': car,
-            'category_title': category.danh_mục,
-            'category_description': category.mô_tả,
-            'category_image': category.image
+            "object_list": car,
+            "category_title": category.danh_mục,
+            "category_description": category.mô_tả,
+            "category_image": category.image,
         }
         return render(self.request, "car_list.html", context)
 
+
 def car_detail(request, id=None):
-    detail = get_object_or_404(Car,id=id)
-    context = {
-        "detail": detail
-    }
-    return render(request, 'car_detail.html', context)
+    detail = get_object_or_404(Car, id=id)
+    context = {"detail": detail}
+    return render(request, "car_detail.html", context)
+
 
 def car_created(request):
     form = CarForm(request.POST or None, request.FILES or None)
@@ -201,11 +256,9 @@ def car_created(request):
         instance = form.save(commit=False)
         instance.save()
         return HttpResponseRedirect("/auth")
-    context = {
-        "form" : form,
-        "title": "Thêm Xe Mới"
-    }
-    return render(request, 'car_create.html', context)
+    context = {"form": form, "title": "Thêm Xe Mới"}
+    return render(request, "car_create.html", context)
+
 
 def car_update(request, id=None):
     detail = get_object_or_404(Car, id=id)
@@ -214,38 +267,38 @@ def car_update(request, id=None):
         instance = form.save(commit=False)
         instance.save()
         return HttpResponseRedirect("/auth")
-    context = {
-        "form": form,
-        "title": "Chỉnh Sửa Xe"
-    }
-    return render(request, 'car_create.html', context)
+    context = {"form": form, "title": "Chỉnh Sửa Xe"}
+    return render(request, "car_create.html", context)
 
-def car_delete(request,id=None):
-    query = get_object_or_404(Car,id = id)
+
+def car_delete(request, id=None):
+    query = get_object_or_404(Car, id=id)
     query.delete()
 
     car = Car.objects.all()
     context = {
-        'car': car,
+        "car": car,
     }
-    return render(request, 'admin_index.html', context)
+    return render(request, "admin_index.html", context)
 
-#order
+
+# order
+
 
 def order_list(request):
     order = Order.objects.all()
 
-    query = request.GET.get('q')
+    query = request.GET.get("q")
     if query:
         order = order.filter(
-            Q(tên_xe__icontains=query)|
-            Q(tên_khách_hàng__icontains=query)|
-            Q(số_điện_thoại__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_khách_hàng__icontains=query)
+            | Q(số_điện_thoại__icontains=query)
         )
-    
+
     # pagination
     paginator = Paginator(order, 4)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         order = paginator.page(page)
     except PageNotAnInteger:
@@ -255,16 +308,17 @@ def order_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         order = paginator.page(paginator.num_pages)
     context = {
-        'order': order,
+        "order": order,
     }
-    return render(request, 'order_list.html', context)
+    return render(request, "order_list.html", context)
+
 
 def order_detail(request, id=None):
-    detail = get_object_or_404(Order,id=id)
+    detail = get_object_or_404(Order, id=id)
     context = {
         "detail": detail,
     }
-    return render(request, 'order_detail.html', context)
+    return render(request, "order_detail.html", context)
 
 
 def order_created(request, car_id=None):
@@ -291,14 +345,18 @@ def order_created(request, car_id=None):
                    Hoặc: +09 38.100.229"""
         from_email = settings.EMAIL_HOST_USER
         to_email = [instance.email]
-        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=to_email,
+            fail_silently=True,
+        )
         return HttpResponseRedirect(instance.get_absolute_url())
-    
-    context = {
-        "form": form,
-        "title": "Tạo đơn đặt xe"
-    }
-    return render(request, 'order_create.html', context)
+
+    context = {"form": form, "title": "Tạo đơn đặt xe"}
+    return render(request, "order_create.html", context)
+
 
 def order_created2(request):
 
@@ -322,16 +380,21 @@ def order_created2(request):
                    Hoặc: +09 38.100.229"""
         from_email = settings.EMAIL_HOST_USER
         to_email = [instance.email]
-        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=to_email,
+            fail_silently=True,
+        )
         return HttpResponseRedirect(instance.get_absolute_url())
-    
-    context = {
-        "form": form,
-        "title": "Tạo đơn đặt xe"
-    }
-    return render(request, 'order_create.html', context)
+
+    context = {"form": form, "title": "Tạo đơn đặt xe"}
+    return render(request, "order_create.html", context)
+
 
 # connection.close()
+
 
 def order_update(request, id=None):
     detail = get_object_or_404(Order, id=id)
@@ -340,32 +403,31 @@ def order_update(request, id=None):
         instance = form.save(commit=False)
         instance.save()
         return HttpResponseRedirect(instance.get_absolute_url())
-    context = {
-        "form": form,
-        "title": "Thay đổi đơn đặt xe"
-    }
-    return render(request, 'order_create.html', context)
+    context = {"form": form, "title": "Thay đổi đơn đặt xe"}
+    return render(request, "order_create.html", context)
 
-def order_delete(request,id=None):
-    query = get_object_or_404(Order,id = id)
+
+def order_delete(request, id=None):
+    query = get_object_or_404(Order, id=id)
     query.delete()
-    return render(request, 'order_delete.html')
+    return render(request, "order_delete.html")
+
 
 def newcar(request):
-    new = Car.objects.order_by('-id').filter(status=True)
-    #seach
-    query = request.GET.get('q')
+    new = Car.objects.order_by("-id").filter(status=True)
+    # seach
+    query = request.GET.get("q")
     if query:
         new = new.filter(
-            Q(tên_xe__icontains=query) |
-            Q(tên_công_ty__icontains=query) |
-            Q(số_ghế__icontains=query) |
-            Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
     paginator = Paginator(new, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         new = paginator.page(page)
     except PageNotAnInteger:
@@ -375,35 +437,37 @@ def newcar(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         new = paginator.page(paginator.num_pages)
     context = {
-        'car': new,
+        "car": new,
     }
-    return render(request, 'new_car.html', context)
+    return render(request, "new_car.html", context)
+
 
 def like_update(request, id=None):
-    new = Car.objects.order_by('-id')
+    new = Car.objects.order_by("-id")
     like_count = get_object_or_404(Car, id=id)
-    like_count.lượt_thích+=1
+    like_count.lượt_thích += 1
     like_count.save()
     context = {
-        'car': new,
+        "car": new,
     }
-    return render(request,'new_car.html',context)
+    return render(request, "new_car.html", context)
+
 
 def popular_car(request):
-    new = Car.objects.order_by('-lượt_thích')
+    new = Car.objects.order_by("-lượt_thích")
     # seach
-    query = request.GET.get('q')
+    query = request.GET.get("q")
     if query:
         new = new.filter(
-            Q(tên_xe__icontains=query) |
-            Q(tên_công_ty__icontains=query) |
-            Q(số_ghế__icontains=query) |
-            Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
     paginator = Paginator(new, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         new = paginator.page(page)
     except PageNotAnInteger:
@@ -413,21 +477,23 @@ def popular_car(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         new = paginator.page(paginator.num_pages)
     context = {
-        'car': new,
+        "car": new,
     }
-    return render(request, 'new_car.html', context)
+    return render(request, "new_car.html", context)
+
 
 def contact(request):
     form = MessageForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return render(request,'msg_success.html')
+        return render(request, "msg_success.html")
     context = {
         "form": form,
         "title": "Liên Hệ",
     }
-    return render(request,'contact.html', context)
+    return render(request, "contact.html", context)
+
 
 def quote(request):
     form = QuoteForm(request.POST or None)
@@ -450,13 +516,20 @@ def quote(request):
                    Hoặc: +09 38.100.229"""
         from_email = settings.EMAIL_HOST_USER
         to_email = [instance.email]
-        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=to_email, fail_silently=True)
-        return render(request,'quote_success.html')
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=to_email,
+            fail_silently=True,
+        )
+        return render(request, "quote_success.html")
     context = {
         "form": form,
         "title": "Quote",
     }
-    return render(request,'quote.html', context)
+    return render(request, "quote.html", context)
+
 
 def profile_update(request, id=None):
     if request.user.is_authenticated:
@@ -465,41 +538,42 @@ def profile_update(request, id=None):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.save()
-            return render(request, 'profile_update.html')
-        context = {
-            "form": form,
-            "title": "Thay đổi thông tin"
-        }
-        return render(request, 'profile.html', context)
+            return render(request, "profile_update.html")
+        context = {"form": form, "title": "Thay đổi thông tin"}
+        return render(request, "profile.html", context)
+
 
 def customer_profile(request, id=None):
-    profile = Customer.objects.get(user_id = request.user.id)
+    profile = Customer.objects.get(user_id=request.user.id)
     form = ProfileForm(request.POST or None, instance=profile)
     if form.is_valid():
         profile = form.save(commit=False)
         profile.save()
     context = {
-        'profile': profile,
+        "profile": profile,
     }
-    return render(request, 'profile.html', context)
-#-----------------Admin Section-----------------
+    return render(request, "profile.html", context)
 
-@login_required(login_url='/login/')
+
+# -----------------Admin Section-----------------
+
+
+@login_required(login_url="/login/")
 def admin_car_list(request):
-    car = Car.objects.order_by('-id')
+    car = Car.objects.order_by("-id")
 
-    query = request.GET.get('q')
+    query = request.GET.get("q")
     if query:
         car = car.filter(
-            Q(tên_xe__icontains=query) |
-            Q(tên_công_ty__icontains=query) |
-            Q(số_ghế__icontains=query) |
-            Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
     paginator = Paginator(car, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         car = paginator.page(page)
     except PageNotAnInteger:
@@ -509,23 +583,21 @@ def admin_car_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         car = paginator.page(paginator.num_pages)
     context = {
-        'car': car,
+        "car": car,
     }
-    return render(request, 'admin_index.html', context)
+    return render(request, "admin_index.html", context)
+
 
 @login_required
 def admin_msg(request):
-    msg = PrivateMsg.objects.order_by('-id')
-    query = request.GET.get('q')
+    msg = PrivateMsg.objects.order_by("-id")
+    query = request.GET.get("q")
     if query:
-        msg = msg.filter(
-            Q(tên_người_dùng__icontains=query) |
-            Q(email__icontains=query)
-        )
+        msg = msg.filter(Q(tên_người_dùng__icontains=query) | Q(email__icontains=query))
 
     # pagination
     paginator = Paginator(msg, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         msg = paginator.page(page)
     except PageNotAnInteger:
@@ -534,15 +606,16 @@ def admin_msg(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         msg = paginator.page(paginator.num_pages)
-    context={
+    context = {
         "msg": msg,
     }
-    return render(request, 'admin_msg.html', context)
+    return render(request, "admin_msg.html", context)
+
 
 @login_required
 def admin_quote(request):
-    quote = Quote.objects.order_by('-id')
-    query = request.GET.get('q')
+    quote = Quote.objects.order_by("-id")
+    query = request.GET.get("q")
     if query:
         quote = quote.filter(
             # Q(tên_xe__icontains=query) |
@@ -551,7 +624,7 @@ def admin_quote(request):
 
     # pagination
     paginator = Paginator(quote, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         quote = paginator.page(page)
     except PageNotAnInteger:
@@ -560,15 +633,16 @@ def admin_quote(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         quote = paginator.page(paginator.num_pages)
-    context={
+    context = {
         "quote": quote,
     }
-    return render(request, 'admin_quote.html', context)
+    return render(request, "admin_quote.html", context)
+
 
 @login_required
 def admin_customer(request):
-    profile = Customer.objects.order_by('-id')
-    query = request.GET.get('q')
+    profile = Customer.objects.order_by("-id")
+    query = request.GET.get("q")
     if query:
         profile = profile.filter(
             # Q(tên_xe__icontains=query) |
@@ -577,7 +651,7 @@ def admin_customer(request):
 
     # pagination
     paginator = Paginator(profile, 12)  # Show 15 contacts per page
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         profile = paginator.page(page)
     except PageNotAnInteger:
@@ -586,17 +660,58 @@ def admin_customer(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         profile = paginator.page(paginator.num_pages)
-    context={
+    context = {
         "profile": profile,
     }
-    return render(request, 'admin_customer.html', context)
+    return render(request, "admin_customer.html", context)
 
-def msg_delete(request,id=None):
+
+def msg_delete(request, id=None):
     query = get_object_or_404(PrivateMsg, id=id)
     query.delete()
     return HttpResponseRedirect("/message/")
 
-def quote_delete(request,id=None):
+
+def quote_delete(request, id=None):
     query = get_object_or_404(Quote, id=id)
     query.delete()
     return HttpResponseRedirect("/adminquote/")
+
+
+# ----------------------Blog-------------------
+def blog_detail(request, id=None):
+    detail = get_object_or_404(Blog, id=id)
+    context = {"detail": detail}
+    return render(request, "blog_detail.html", context)
+
+
+def blog_created(request):
+    form = BlogForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect("/auth")
+    context = {"form": form, "title": "Thêm Blog Mới"}
+    return render(request, "blog_create.html", context)
+
+
+def blog_update(request, id=None):
+    detail = get_object_or_404(Blog, id=id)
+    form = BlogForm(request.POST or None, instance=detail)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect("/auth")
+    context = {"form": form, "title": "Chỉnh Sửa Blog"}
+    return render(request, "blog_create.html", context)
+
+
+def blog_delete(request, id=None):
+    query = get_object_or_404(Blog, id=id)
+    query.delete()
+
+    blog = Blog.objects.all()
+    context = {
+        "blog": blog,
+    }
+    return render(request, "admin_index.html", context)

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Chi Tiết Về {{detail.title}} {% endblock %}
+
+{% block body %}
+
+{% block search %}
+{% endblock %}
+<br>
+<div class ='col-sm-6 col-sm-offset-3'>
+  <div class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-film"></span> Thông tin Blog</strong>
+  </div>
+  {% if detail.image %}
+  <img src='{{ detail.image.url }}' class="img-responsive"/>
+  {% endif %}
+  <a href="" class="list-group-item"><strong>Tiêu đề   : </strong>{{detail.title}}</a>
+  <a href="" class="list-group-item"><strong>Nội dung   : </strong>{{detail.variables}}</a>
+  <div class="pull-right">
+    <a href="{% url 'newblog' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-list"></span> Thêm Blog</button></a>
+  <hr>
+  </div>
+</div>
+{% endblock %}
