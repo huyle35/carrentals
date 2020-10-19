@@ -1,17 +1,20 @@
- # -*- coding: utf-8 -*
+# -*- coding: utf-8 -*
 from django import forms
-from .models import Car, Order, PrivateMsg, Quote, Customer
+from .models import Car, Order, PrivateMsg, Quote, Customer, Blog
 from django.contrib.auth.models import User
 import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
+
 class DateInput(forms.DateInput):
-    input_type = 'date'
+    input_type = "date"
+
 
 class DateForm(forms.Form):
     date_field = forms.DateField(widget=DateInput(format="%d-%m-%Y"))
+
 
 class CarForm(forms.ModelForm):
     tên_xe = forms.CharField(required=True)
@@ -30,9 +33,10 @@ class CarForm(forms.ModelForm):
             "giá_tham_khảo",
             "nội_dung",
             "danh_mục",
-            "status"
+            "status",
         ]
-        
+
+
 class OrderForm(forms.ModelForm):
     # tên_xe = forms.IntegerField(widget=forms.HiddenInput(), initial=1)
     # defaultcar = Car.objects.get(id=1)
@@ -42,8 +46,12 @@ class OrderForm(forms.ModelForm):
     # tilte_xe.choices =[('1',Car.objects.get(id=1).tên_xe)]
     # tên_xe = Car
     tên_khách_hàng = forms.CharField(max_length=50, required=False)
-    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
-    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
+    ngày_đi = forms.DateField(
+        widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm"
+    )
+    ngày_về = forms.DateField(
+        widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm"
+    )
     xuất_phát = forms.CharField(required=True)
     điểm_đến = forms.CharField(required=True)
 
@@ -58,8 +66,9 @@ class OrderForm(forms.ModelForm):
             "ngày_về",
             "xuất_phát",
             "điểm_đến",
-            "nhu_cầu_khác"
+            "nhu_cầu_khác",
         ]
+
 
 class MessageForm(forms.ModelForm):
     class Meta:
@@ -71,9 +80,14 @@ class MessageForm(forms.ModelForm):
             "nội_dung",
         ]
 
+
 class QuoteForm(forms.ModelForm):
-    ngày_đi = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
-    ngày_về = forms.DateField(widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm")
+    ngày_đi = forms.DateField(
+        widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm"
+    )
+    ngày_về = forms.DateField(
+        widget=DateInput(format="%d-%m-%Y"), help_text="Ví dụ: ngày / tháng / năm"
+    )
     xuất_phát = forms.CharField(required=True)
     điểm_đến = forms.CharField(required=True)
 
@@ -90,6 +104,7 @@ class QuoteForm(forms.ModelForm):
             "nhu_cầu_khác",
         ]
 
+
 class ProfileForm(forms.ModelForm):
     số_điện_thoại = forms.IntegerField()
     địa_chỉ = forms.CharField()
@@ -99,4 +114,19 @@ class ProfileForm(forms.ModelForm):
         fields = [
             "số_điện_thoại",
             "địa_chỉ",
+        ]
+
+
+class BlogForm(forms.ModelForm):
+    title = forms.CharField(required=True)
+    content = forms.CharField(required=False)
+    variables = forms.CharField(required=False)
+
+    class Meta:
+        model = Blog
+        fields = [
+            "image",
+            "title",
+            "content",
+            "variables",
         ]

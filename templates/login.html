@@ -242,11 +242,11 @@
 </div>
 <hr>
 <div class ='col-sm-5 col-sm-offset-3'>
-        <button class="btn btn-group-vertical mb-2">
+        {% comment %} <button class="btn btn-group-vertical mb-2">
         <a href="{% url 'social:begin' 'facebook' %}"> Đăng nhập với Facebook
             </a>
         </button>
-    </div>
+    </div> {% endcomment %}
   {% comment %} {% if user.is_authenticated %}
   <p>Welcome, {{ user.username }} !</p>
  
