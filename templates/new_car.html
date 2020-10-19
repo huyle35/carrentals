@@ -3,6 +3,7 @@
 {% block nav %}
         <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Xe Mới Cập Nhật</a></li>
         <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Xe Thịnh Hành</a></li>
+        <li><a href="{% url 'blog_list' %}"><span class="glyphicon glyphicon-list"></span>Blog</a></li>
         <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-star"></span> Báo Giá</a></li>
         <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Đăng Xuất {{request.user.username}}</a></li>
@@ -54,3 +55,57 @@
         <hr>
 </div>
 {% endblock %}
+<footer class="container-fluid bg-grey">
+        <div class="row">
+          <div class="col-lg-4">
+            <h2 class="footer-heading mb-4">Hoàng Gia Thịnh</h2>
+            <p>Tự tin mang lại cho Quý khách những chuyến đi thật hài lòng, hoàn mỹ trọn vẹn.</p>
+            <ul class="list-unstyled social">
+              <li><a href="#"><span class="icon-facebook"></span></a></li>
+              <li><a href="#"><span class="icon-instagram"></span></a></li>
+              <p>Trụ sở chính: 778 Quốc lộ 1A, Khu Phố 4, P. An Phú Đông, Quận 12, TP.HCM</p>
+              <p>(Giờ giao dịch: 8h00 – 17h00 từ thứ 2 – thứ 7)</p>
+            </ul>
+          </div>
+          <div class="col-lg-8 ml-auto">
+            <div class="row">
+              <div class="col-lg-4">
+                <h2 class="footer-heading mb-4">Truy Cập Nhanh</h2>
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</a>
+                  </li>
+                  <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-info-sign"></span> Báo Giá</a></li>
+                  <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a>
+                  </li>
+                  <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-share"></span> Đăng Nhập</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-4">
+                <h2 class="footer-heading mb-4">Hỗ Trợ</h2>
+                <ul class="list-unstyled">
+                  <p>Tel: 02866.800.456</p>
+                  <p>Hotline: 0938.358.309 (Zalo, Phone)</p>
+                  <li><a href="{% url 'contact' %}"> Liên Hệ</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-4">
+                <h2 class="footer-heading mb-4">Công Ty</h2>
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'home' %}">Giới Thiệu</a></li>
+                  <li><a href="{% url 'blog_list' %}">Tin Tức</a></li>
+                  <li><a href="{% url 'contact' %}">Liên Hệ</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <p class="container-fluid text-center">
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+            with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"
+              target="_blank">Hoàng Gia Thịnh</a>
+          </p>
+        </div>
+    </div>

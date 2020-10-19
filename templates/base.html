@@ -219,7 +219,9 @@
       </form>
     {% endblock %}
 {% block nav %}
-
+        <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-align-justify"></span> Danh Sách Xe</a></li>
+        <li><a href="{% url 'blog_list' %}"><span class="glyphicon glyphicon-list"></span>Blog</a></li>
+        <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-star"></span> Báo Giá</a></li>
         <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
 {% endblock %}

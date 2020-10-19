@@ -260,6 +260,7 @@
           <li><a href="#contact">Liên Hệ</a></li>
           <li><a href="{% url 'car_list' %}">Danh Sách Xe</a></li>
           <li><a href="{% url 'quote' %}">Báo Giá</a></li>
+          <li><a href="{% url 'blog_list' %}">Blog</a></li>
           <li><a href="{% url 'login' %}">Đăng Nhập</a></li>
         </ul>
       </div>
@@ -479,9 +480,10 @@
             <img src='{{ ob.image.url }}' class="img-responsive" />
             {% endif %}
             <div class="caption">
-              <strong>{{ ob.title }}</strong>
+              <strong><span style="color:red">  {{ ob.title }}</span></strong>
               <hr>
-              <p> Nội dung: <span style="color:red">{{ ob.content }}</span><br>
+              <p>{{ob.date}}
+              <br><span style="color:black">  {{ ob.content }}...</span><br>
               </p>
               <div class="pull-right">
                 <p><a href="{% url 'blog_detail' ob.id %}" class="btn btn-primary" role="button">Đọc thêm</a>
@@ -570,7 +572,7 @@
         </div>
         <hr>
         <div>
-          <p class="mt-50 mx-auto footer-text col-lg-12">
+          <p class="container-fluid text-center">
             Copyright &copy;
             <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
             with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"

@@ -193,7 +193,7 @@ def home(request):
         instance.save()
         return HttpResponseRedirect("/contact/")
 
-    blog = Blog.objects.all()
+    blog = Blog.objects.order_by("date")[:4]
     context = {
         "form": form,
         "title": "Hoàng Gia Thịnh",
@@ -679,6 +679,35 @@ def quote_delete(request, id=None):
 
 
 # ----------------------Blog-------------------
+
+
+def blog_list(request):
+    blog = Blog.objects.all()
+    query = request.GET.get("q")
+    if query:
+        blog = blog.filter(
+            Q(title__icontains=query)
+            | Q(content__icontains=query)
+            | Q(variables__icontains=query)
+        )
+
+    # pagination
+    paginator = Paginator(blog, 12)  # Show 15 contacts per page
+    page = request.GET.get("page")
+    try:
+        blog = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        blog = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        blog = paginator.page(paginator.num_pages)
+    context = {
+        "blog": blog,
+    }
+    return render(request, "blog_list.html", context)
+
+
 def blog_detail(request, id=None):
     detail = get_object_or_404(Blog, id=id)
     context = {"detail": detail}

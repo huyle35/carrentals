@@ -17,7 +17,7 @@ from system.views import (
     quote,
     customer_profile,
     profile_update,
-    CategoryView,
+    blog_list,
     blog_created,
     blog_update,
     blog_delete,
@@ -40,7 +40,8 @@ urlpatterns = [
     path("quote/", quote, name="quote"),
     path("update/", profile_update, name="update_customer"),
     # ---------------Blog----------------
-    path("(<id>)/", blog_detail, name="blog_detail"),
+    path("bloglist/", blog_list, name="blog_list"),
+    path("blog/(<id>)/", blog_detail, name="blog_detail"),
     path("newblog/", blog_created, name="newblog"),
     path("(<id>)/edit/", blog_update, name="blog_edit"),
     path("(<id>)/delete/", blog_delete, name="blog_delete"),
