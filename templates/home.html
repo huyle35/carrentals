@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -238,6 +239,27 @@
         font-size: 150px;
       }
     }
+    .checked {
+      color: orange;
+    }
+    .img {
+    color: red;
+    position: absolute;
+    bottom: 320px;
+    left: 70px;
+  }
+  .image {
+    color: yellow;
+    position: absolute;
+    bottom: 320px;
+    left: 70px;
+  }
+  .image1 {
+    color: white;
+    position: absolute;
+    bottom: 320px;
+    left: 70px;
+  }
   </style>
 </head>
 
@@ -257,11 +279,18 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#about">Giới Thiệu</a></li>
           <li><a href="#services">Dịch Vụ</a></li>
-          <li><a href="#contact">Liên Hệ</a></li>
+          <li><a href="{% url 'contact' %}">Liên Hệ</a></li>
           <li><a href="{% url 'car_list' %}">Danh Sách Xe</a></li>
           <li><a href="{% url 'quote' %}">Báo Giá</a></li>
           <li><a href="{% url 'blog_list' %}">Blog</a></li>
-          <li><a href="{% url 'login' %}">Đăng Nhập</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tài Khoản
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'login' %}">Đăng Nhập</a></li>
+              <li><a href="{% url 'register' %}">Đăng Ký</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -280,12 +309,21 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <img src="{% static 'images/hero_1.jpg' %}" />
+          <div class="carousel-caption">
+          <h1 class="img"><strong>Nhanh Chóng – Chất Lượng – Uy Tín</strong></h1>
+        </div>  
         </div>
         <div class="item">
           <img src="{% static 'images/bg2.jpg' %}" />
+          <div class="carousel-caption">
+          <h1 class="image"><strong>Giá Rẻ Hợp Lý – Báo Giá Nhanh</strong></h1>
+        </div>  
         </div>
         <div class="item">
           <img src="{% static 'images/bg5.jpg' %}" />
+          <div class="carousel-caption">
+          <h1 class="image1"><strong>Tư Vấn Tận Tình – Hỗ Trợ 24/7</strong></h1>
+        </div>  
         </div>
       </div>
     </div>
@@ -299,9 +337,6 @@
       <span class="sr-only">Trang sau</span>
     </a>
   </div>
-
-  {% comment %} <a href="{% url '/www.facebook.com/hoanggiathinhlimousine' %}"><button type="button"
-      class="fa fa-facebook-official">Facbook</button></a> {% endcomment %}
 
   <!-- List Car -->
   <br>
@@ -345,14 +380,50 @@
             <h2>Giới Thiệu</h2>
             <p><span style="color:red">HOÀNG GIA THỊNH</span> tự hào là công ty hàng đầu trong lĩnh vực cho thuê xe
               limousine chất lượng cao tại TP Hồ Chí Minh. Với các dòng xe du lịch cao cấp, đời mới nhất từ xe du lịch 4
-              chỗ – 45 chỗ cũng như đẳng cấp sang trọng của các dòng xe vip: Limousine, Mercedes, BMW, KIA, … </p>
-            <p>Để làm được điều này, ngoài những điều sẵn có, Hoàng Gia Thịnh đã không quên tìm đến mong muốn,nhu cầu
-              thật sự về một chuyến đi của khách hàng. Từ đó với phương châm: <span style="color:red">"An Toàn - Chất
-                Lượng - Chuyên Nghiệp"</span>,<span style="color:red"> HOÀNG GIA THỊNH</span> đã không ngừng cố gắng và
-              dồn tâm sức để đảm bảo cho quý khách những chuyến đi thực sự ý nghĩa, thoải mái vui vẻ.
-            </p>
-            {% comment %} <br><button class="btn btn-default btn-lg"><a href="{% url 'gioithieu' %}">Xem
-                Thêm</a></button> {% endcomment %}
+              chỗ – 45 chỗ cũng như đẳng cấp sang trọng của các dòng xe vip: Limousine, Mercedes, BMW, KIA, …
+              <button class="btn btn-block" data-toggle="collapse" data-target="#demo">Đọc tiếp...</button></p>
+ 
+            <div id="demo" class="collapse">
+              <p>Để làm được điều này, ngoài những điều sẵn có, Hoàng Gia Thịnh đã không quên tìm đến mong muốn,nhu cầu
+                thật sự về một chuyến đi của khách hàng. Từ đó với phương châm: <span style="color:red">"An Toàn - Chất
+                  Lượng - Chuyên Nghiệp"</span>,<span style="color:red"> HOÀNG GIA THỊNH</span> đã không ngừng cố gắng
+                và
+                dồn tâm sức để đảm bảo cho quý khách những chuyến đi thực sự ý nghĩa, thoải mái vui vẻ.
+                TẠI SAO BẠN CHỌN HOÀNG GIA THỊNH ?
+                Sự lựa chọn, sự đồng hành của quý khách là niềm tin, là động lực để Hoàng Gia Thịnh ngày càng tốt hơn,
+                hoàn thiện hơn và phát triển. Vậy những lý do nào để quý khách có thể an tâm đến với Hoàng Gia Thịnh?
+ 
+              <p style="color:red">Về Chất Lượng Xe:</p>
+ 
+              <p>Các dòng xe của Hoàng Gia Thịnh là những dòng xe được đầu tư mới, cam kết 90% xe từ đời 2015-2018. Để
+                đảm bảo chất lượng đời xe phục vụ cho quý khách, công ty không ngừng thay mới, bổ sung đội xe và bảo trì
+                bảo dưỡng xe cẩn thận, định kỳ thường xuyên theo tiêu chuẩn quốc tế, đảm bảo cho xe vận hành tốt nhất
+                Đội xe du lịch cao cấp từ 4-45 chỗ đầy đủ tiện nghi, sạch sẽ, thoáng mát, máy lạnh cực mạnh, màn hình ti
+                vi LCD cực lớn, rõ nét; dàn loa, đầu đĩa, âm thanh, Micro đầy đủ, phục vụ tiện ích tối đa cho khách
+                hàng.</p>
+              <p>Đội xe Vip của Hoàng Gia Thịnh được chú ý đến từng chi tiết: nội thất sang trọng, đằng cấp, trang bị
+                đầy
+                đủ các thiết bị, tiện nghi phục vụ theo tiêu chuẩn công nghệ hiện đại: sàn được lót gỗ quý, ghế bọc da
+                sang trọng có hệ thống massage toàn thân cho khách, rộng rãi, thoải mái; dàn loa , âm thanh 6 vị trí,
+                đầu đĩa đời mới cùng với màn hình LCD to, rõ nét. Cùng với đó các tiện ích như wifi cực mạnh, đầu sạc
+                điện thoại tại mỗi ghế, tủ lạnh trữ nước, khăn lạnh, bàn làm việc, đèn led, ngăn sách báo,…Tất cả đều
+                được trau chuốt đến nhỏ nhất để hỗ trợ tiện nghi tối đa cho quý khách
+                Các xe trước khi khởi hành luôn được kiểm tra quy trình kỹ thuật và vận hành chu đáo, cẩn thận. Đội xe
+                luôn được quản lý theo thệ thống quy trình tiêu chuẩn đặc biệt chặt chẽ, kể cá trong quá trình phục vụ
+                khách, đảm bảo chất lượng xe tốt nhất phục vụ đồng thời nắm được tình hình để giải quyết nhanh nhất các
+                vấn đề có thể xảy ra, cho khách luôn an tâm hài lòng trong chuyến đi</p>
+              <p style="color:red">Về Phong Cách Phục Vụ:</p>
+ 
+              <p>Đội ngũ tài xế phục vụ tận tình, vui vẻ, thân thiện, chu đáo với hành khách. Tác phong lịch sự, nhanh
+                nhẹn. Đặc biệt Hoàng Gia Thịnh có đội ngũ tài xế nhiều kinh nghiệm, thành thạo các tuyến đường, và được
+                đào tạo, sát hạch thường xuyên, bài bản. Đảm bảo đem lại sự an toàn cho hành khách và chuyên nghiệp khi
+                phục vụ.</p>
+              <p>Người trực tiếp đồng hành cùng với hành khách không phải ai khác mà chính là các anh tài xế, thái độ và
+                phong cách phục vụ của tài xế là bộ mặt , là uy tín của công ty. Do vậy Hoàng Gia Thịnh luôn coi trọng
+                bồi dưỡng nghiệp vụ và đạo đức nghề nghiệp cho lái xe, đồng thời quản lý chặt chẽ góp phần làm nên
+                chuyến đi được hoàn mỹ trọn vẹn.</p>
+              </p>
+            </div>
           </div>
           <div class="col-sm-4">
             <span class="glyphicon glyphicon-signal logo"></span>
@@ -360,6 +431,7 @@
         </div>
       </div>
     </div>
+
     <!-- Container (Services Section) -->
     <div id="services" class="container-fluid text-center">
       <h2>Dịch Vụ</h2>
@@ -414,52 +486,67 @@
     </div>
 
     <!-- Container (Portfolio Section) -->
-    <div id="portfolio" class="container-fluid text-center bg-grey">
-
-      <h2 style="color:red">Khách Hàng Nói Gì Về Hoàng Gia Thịnh</h2>
-      <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-
-            <h4>"Tôi đã sử dụng dịch vụ của Hoàng Gia Thịnh. Tôi rất hài lòng đem lại cho tôi sự thoải mái khi di chuyển
-              xa. Nhân viên tư vấn rất nhiệt tình và tận tâm.
-              Tài xế luôn chu đáo nhiệt tình,vui vẻ, hòa đồng, luôn giúp đỡ khi hàng lý quá nhiều."
-              <br><br><span style="font-style:normal;">Nguyễn Quốc Sang / Giám Đốc</span></h4>
-          </div>
-          <div class="item">
-            <h4>"Tôi rất hài lòng với dịch vụ thuê xe limousine tại Hoàng Gia Thịnh cung cấp. Xe sạch sẽ, không mùi hôi
-              khó chịu, ghế ngồi thoải mái. Giá cả cũng không quá cao so với các đơn vị khác.
-              Tôi rất là hài lòng với công ty này."
-
-              <br><br><span style="font-style:normal;">Nguyễn Kiều Thi / GĐ Tín Nghĩa</span></h4>
-          </div>
-          <div class="item">
-            <h4>"Cảm giác rất là thoải mái khi trải nghiệm dịch vụ thuê xe mà Hoàng Gia Thịnh đem lại. Bên cạnh đó tôi
-              được nhân viên chăm sóc rất tận tình trên suốt hành trình. Báo giá nhanh và thời gian đón rất đúng giờ.
-              Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc công ty tôi về dịch vụ này. "
-
-              <br><br><span style="font-style:normal;">Chị Nguyễn Thùy Trang / Q9</span></h4>
+    <div id="band" class="container text-center">
+      <h3><span style="color:red">FEEDBACK</span></h3>
+      <p><em>Khách Hàng Nói Gì Về Hoàng Gia Thịnh</em></p>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <p class="text-center"><strong>Nguyễn Quốc Sang</strong></p>
+          <p class="text-center"><strong>--Giám Đốc--</strong></p><span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span><br>
+          <a href="#demo1" data-toggle="collapse">
+            <img src="{% static 'images/f5.png' %}" class="img-circle person" alt="Random Name" width="255"
+              height="255">
+          </a>
+          <hr>
+          <div id="demo1" class="collapse">
+            <p>Bộ phận tư vấn luôn nhiệt tình, tận tâm, lắng nghe nguyện vọng mong muốn của khách hàng, luôn đặt lợi ích
+              của khách lên hàng đầu. Bộ phân tư vấn là đội ngũ tiếp xúc làm việc đầu tiên với hành khách, là cảm tình
+              đầu
+              tiên của khách đối với công ty.</p>
           </div>
         </div>
+        <div class="col-sm-4">
+          <p class="text-center"><strong>Nguyễn Kiều Thi</strong></p>
+          <p class="text-center"><strong>--GĐ Tín Nghĩa--</strong></p>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span><br>
+          <a href="#demo2" data-toggle="collapse">
+            <img src="{% static 'images/f3.jpg' %}" class="img-circle person" alt="Random Name" width="255"
+              height="255">
+          </a>
+          <hr>
+          <div id="demo2" class="collapse">
+            <p>ôi rất hài lòng với dịch vụ thuê xe limousine tại Hoàng Gia Thịnh cung cấp. Xe sạch sẽ, không mùi hôi khó chịu, ghế ngồi thoải mái. Giá cả cũng không quá cao so với các đơn vị khác.
 
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Trang trước</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Trang sau</span>
-        </a>
+Tôi rất là hài lòng với công ty này.</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <p class="text-center"><strong>Chị Nguyễn Thùy Trang</strong></p>
+          <p class="text-center"><strong>--Q9--</strong></p>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span><br>
+          <a href="#demo3" data-toggle="collapse">
+            <img src="{% static 'images/f4.jpg' %}" class="img-circle person" alt="Random Name" width="255"
+              height="255">
+          </a>
+          <hr>
+          <div id="demo3" class="collapse">
+            <p>Cảm giác rất là thoải mái khi trải nghiệm dịch vụ thuê xe mà Hoàng Gia Thịnh đem lại. Bên cạnh đó tôi được nhân viên chăm sóc rất tận tình trên suốt hành trình. Báo giá nhanh và thời gian đón rất đúng giờ.
+
+Lần sau tôi sẽ quay lại và giới thiệu cho đồng nghiệp hoặc công ty tôi về dịch vụ này.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -577,10 +664,13 @@
             <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
             with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"
               target="_blank">Hoàng Gia Thịnh</a>
+              <br>
+              <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+              </a>
           </p>
         </div>
     </div>
-
     <script>
       $(document).ready(function () {
         // Add smooth scrolling to all links in navbar + footer link
