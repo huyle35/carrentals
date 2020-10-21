@@ -80,6 +80,7 @@ class Blog(models.Model):
     date = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=100)
+    text = models.TextField()
     variables = models.TextField()
 
     def __str__(self):

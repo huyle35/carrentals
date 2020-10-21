@@ -678,6 +678,35 @@ def quote_delete(request, id=None):
     return HttpResponseRedirect("/adminquote/")
 
 
+def admin_blog(request):
+    blog = Blog.objects.order_by("-id")
+
+    query = request.GET.get("q")
+    if query:
+        blog = blog.filter(
+            Q(title__icontains=query)
+            | Q(content__icontains=query)
+            | Q(varialbes__icontains=query)
+            | Q(date__icontains=query)
+        )
+
+    # pagination
+    paginator = Paginator(blog, 12)  # Show 15 contacts per page
+    page = request.GET.get("page")
+    try:
+        blog = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        blog = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        blog = paginator.page(paginator.num_pages)
+    context = {
+        "blog": blog,
+    }
+    return render(request, "admin_blog.html", context)
+
+
 # ----------------------Blog-------------------
 
 

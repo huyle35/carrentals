@@ -120,6 +120,7 @@ class ProfileForm(forms.ModelForm):
 class BlogForm(forms.ModelForm):
     title = forms.CharField(required=True)
     content = forms.CharField(required=False)
+    text = forms.CharField(required=False)
     variables = forms.CharField(required=False)
 
     class Meta:
@@ -128,5 +129,6 @@ class BlogForm(forms.ModelForm):
             "image",
             "title",
             "content",
+            "text",
             "variables",
         ]

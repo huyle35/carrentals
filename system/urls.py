@@ -43,6 +43,6 @@ urlpatterns = [
     path("bloglist/", blog_list, name="blog_list"),
     path("blog/(<id>)/", blog_detail, name="blog_detail"),
     path("newblog/", blog_created, name="newblog"),
-    path("(<id>)/edit/", blog_update, name="blog_edit"),
+    path("blog/(<id>)/edit/", blog_update, name="blog_edit"),
     path("(<id>)/delete/", blog_delete, name="blog_delete"),
 ]
