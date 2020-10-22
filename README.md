@@ -17,9 +17,7 @@ Lớp: Công Nghệ Thông Tin - Khóa 57
     - Đặt xe thành công và thông tin gửi đến Admin
     - Gửi liên hệ thành công đến Admin
 2. Chưa hoàn thành:
+
     - Lưu lịch sử đã đặt xe của khách hàng
     - Tư vấn trao đổi trực tuyến
-3. Đang gặp vấn đề:
-    - Phân quyền truy cập
-...
 
