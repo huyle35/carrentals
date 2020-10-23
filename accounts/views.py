@@ -21,6 +21,7 @@ from django.contrib.auth import (
 )
 from .forms import UserLoginForm, UserCreationForm, AdminLoginForm
 
+
 def login_view(request):
     form1 = UserLoginForm(request.POST or None)
     if form1.is_valid():
@@ -31,6 +32,7 @@ def login_view(request):
             login(request, user)
             return redirect("/car/newcar/")
     return render(request, "login.html", {"form": form1, "title": "Đăng Nhập"})
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -45,16 +47,16 @@ def register_view(request):
     else:
         form = SignUpForm()
     context = {
-        "title" : "Đăng Ký",
+        "title": "Đăng Ký",
         "form": form,
     }
     return render(request, "register.html", context)
 
+
 def logout_view(request):
     car = Car.objects.order_by("-lượt_thích")[:4]
     context = {
-        "title" : "Hoàng Gia Thịnh",
+        "title": "Hoàng Gia Thịnh",
         "car": car,
     }
-    return render(request,'home.html', context)
-
+    return render(request, 'home.html', context)

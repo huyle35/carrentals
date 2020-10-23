@@ -7,7 +7,7 @@
 <div class="collapse navbar-collapse" id="myNavbar">
   <ul class="nav navbar-nav navbar-right">
     <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
-    <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
+    <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> List Đặt Xe</a></li>
     <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
     <li><a href="{% url 'blog_list' %}"><span class="glyphicon glyphicon-list"></span>Blog</a></li>
     <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
@@ -51,7 +51,12 @@
             <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-info-sign"></span> Báo Giá</a></li>
             <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a>
             </li>
-            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-share"></span> Đăng Nhập</a></li>
+            {% if user.is_active %}
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Đăng Xuất
+                {{request.user.username}}</a>
+              {% else %}
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+            {% endif %}
           </ul>
         </div>
         <div class="col-lg-4">
@@ -77,9 +82,14 @@
   <div>
     <p class="container-fluid text-center">
       Copyright &copy;
-      <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+      <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
+      made
       with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"
         target="_blank">Hoàng Gia Thịnh</a>
+      <br>
+      <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
     </p>
   </div>
   </div>

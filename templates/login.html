@@ -8,6 +8,7 @@
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Hoàng Gia Thịnh</title>
@@ -19,94 +20,113 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
-  body {
+    body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
-  }
-  h2 {
+    }
+
+    h2 {
       font-size: 24px;
       text-transform: uppercase;
       color: #303030;
       font-weight: 600;
       margin-bottom: 30px;
-  }
-  h4 {
+    }
+
+    h4 {
       font-size: 19px;
       line-height: 1.375em;
       color: #303030;
       font-weight: 400;
       margin-bottom: 30px;
-  }
-  .jumbotron {
+    }
+
+    .jumbotron {
       background-color: #f4511e;
       color: #fff;
       padding: 100px 25px;
       font-family: Montserrat, sans-serif;
-  }
-  .container-fluid {
+    }
+
+    .container-fluid {
       padding: 60px 50px;
-  }
-  .bg-grey {
+    }
+
+    .bg-grey {
       background-color: #f6f6f6;
-  }
-  .logo-small {
+    }
+
+    .logo-small {
       color: #ff3333;
       font-size: 50px;
-  }
-  .logo {
+    }
+
+    .logo {
       color: #ff3333;
       font-size: 200px;
-  }
-  .thumbnail {
+    }
+
+    .thumbnail {
       padding: 0 0 15px 0;
       border: none;
       border-radius: 0;
-  }
-  .thumbnail img {
+    }
+
+    .thumbnail img {
       width: 100%;
       height: 100%;
       margin-bottom: 10px;
-  }
-  .carousel-control.right, .carousel-control.left {
+    }
+
+    .carousel-control.right,
+    .carousel-control.left {
       background-image: none;
       color: #f4511e;
-  }
-  .carousel-indicators li {
-      border-color: #f4511e;
-  }
-  .carousel-indicators li.active {
-      background-color: #f4511e;
-  }
+    }
 
-.item img{
-    width: 1200px;
-    height: 900px;
-}
-  .item h4 {
+    .carousel-indicators li {
+      border-color: #f4511e;
+    }
+
+    .carousel-indicators li.active {
+      background-color: #f4511e;
+    }
+
+    .item img {
+      width: 1200px;
+      height: 900px;
+    }
+
+    .item h4 {
       font-size: 19px;
       line-height: 1.375em;
       font-weight: 400;
       font-style: italic;
       margin: 70px 0;
-  }
-  .item span {
+    }
+
+    .item span {
       font-style: normal;
-  }
-  .panel {
+    }
+
+    .panel {
       border: 1px solid #f4511e;
-      border-radius:0 !important;
+      border-radius: 0 !important;
       transition: box-shadow 0.5s;
-  }
-  .panel:hover {
-      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-  }
-  .panel-footer .btn:hover {
+    }
+
+    .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0, 0, 0, .2);
+    }
+
+    .panel-footer .btn:hover {
       border: 1px solid #f4511e;
       background-color: #fff !important;
       color: #f4511e;
-  }
-  .panel-heading {
+    }
+
+    .panel-heading {
       color: #fff !important;
       background-color: #f4511e !important;
       padding: 25px;
@@ -115,25 +135,30 @@
       border-top-right-radius: 0px;
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
-  }
-  .panel-footer {
+    }
+
+    .panel-footer {
       background-color: white !important;
-  }
-  .panel-footer h3 {
+    }
+
+    .panel-footer h3 {
       font-size: 32px;
-  }
-  .panel-footer h4 {
+    }
+
+    .panel-footer h4 {
       color: #aaa;
       font-size: 14px;
-  }
-  .panel-footer .btn {
+    }
+
+    .panel-footer .btn {
       margin: 15px 0;
       background-color: #f4511e;
       color: #fff;
-  }
-  .navbar {
+    }
+
+    .navbar {
       margin-bottom: 0;
-      background-color:#b30000;
+      background-color: #b30000;
       z-index: 9999;
       border: 0;
       font-size: 12px !important;
@@ -141,176 +166,140 @@
       letter-spacing: 4px;
       border-radius: 0;
       font-family: Montserrat, sans-serif;
-  }
-  .navbar li a, .navbar .navbar-brand {
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
       color: #fff !important;
-  }
-  .navbar-nav li a:hover, .navbar-nav li.active a {
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
       color: #f4511e !important;
       background-color: #fff !important;
-  }
-  .navbar-default .navbar-toggle {
+    }
+
+    .navbar-default .navbar-toggle {
       border-color: transparent;
       color: #fff !important;
-  }
-  footer .glyphicon {
+    }
+
+    footer .glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
       color: #f4511e;
-  }
-  .slideanim {visibility:hidden;}
-  .slide {
+    }
+
+    .slideanim {
+      visibility: hidden;
+    }
+
+    .slide {
       animation-name: slide;
       -webkit-animation-name: slide;
       animation-duration: 1s;
       -webkit-animation-duration: 1s;
       visibility: visible;
-  }
-  @keyframes slide {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateY(70%);
     }
-    100% {
-      opacity: 1;
-      -webkit-transform: translateY(0%);
+
+    @keyframes slide {
+      0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+      }
+
+      100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+      }
     }
-  }
-  @-webkit-keyframes slide {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateY(70%);
+
+    @-webkit-keyframes slide {
+      0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+      }
+
+      100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+      }
     }
-    100% {
-      opacity: 1;
-      -webkit-transform: translateY(0%);
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .col-sm-4 {
-      text-align: center;
-      margin: 25px 0;
-    }
-    .btn-lg {
+
+    @media screen and (max-width: 768px) {
+      .col-sm-4 {
+        text-align: center;
+        margin: 25px 0;
+      }
+
+      .btn-lg {
         width: 100%;
         margin-bottom: 35px;
+      }
     }
-  }
-  @media screen and (max-width: 480px) {
-    .logo {
+
+    @media screen and (max-width: 480px) {
+      .logo {
         font-size: 150px;
+      }
     }
-  }
   </style>
 </head>
 {% block body %}
 <nav class="navbar navbar-custom navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="glyphicon glyphicon-align-justify"></span>
       </button>
-      <div class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Hoàng Gia Thịnh</div>
+      <a href="{% url 'home' %}" class="navbar-brand"><span class="glyphicon glyphicon-king"></span> Hoàng Gia
+        Thịnh</a>
     </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-         <li>
-    {% block nav %}
+        <li>
+          {% block nav %}
         <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-star"></span> Đăng Ký</a></li>
         <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a></li>
         <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-euro"></span>Báo Giá</a></li>
         <li><a href="{% url 'blog_list' %}"><span class="glyphicon glyphicon-list"></span>Blog</a></li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
-    {% endblock %}
+        {% endblock %}
       </ul>
     </div>
   </div>
 </nav>
 
-<div class ='col-sm-5 col-sm-offset-3'>
-<br><br><br><br>
-    <h1>{{ title }}</h1><hr>
-    <form method="POST" action="">{% csrf_token %}
-        <br>
-        {{form|crispy}}
-        <div class="col-sm-6 col-sm-offset-3">
-            <a href="{% url 'password_reset' %}"><span class="glyphicon glyphicon-user"></span> Quên mật khẩu ? </a>
-		</div>
-        <div class="pull-right">
-            <input type="submit" class="btn btn-primary" value="{{ title }}"/>
-        </div>
-    </form>
-    <div class="row">
-</div>
-<hr>
-<div class ='col-sm-5 col-sm-offset-3'>
-        {% comment %} <button class="btn btn-group-vertical mb-2">
-        <a href="{% url 'social:begin' 'facebook' %}"> Đăng nhập với Facebook
-            </a>
-        </button>
-    </div> {% endcomment %}
+<div class='col-sm-5 col-sm-offset-3'>
+  <br><br><br><br>
+  <h1>{{ title }}</h1>
+  <hr>
+  <form method="POST" action="">{% csrf_token %}
+    <br>
+    {{form|crispy}}
+    <div class="col-sm-6 col-sm-offset-3">
+      <a href="{% url 'password_reset' %}"><span class="glyphicon glyphicon-user"></span> Quên mật khẩu ? </a>
+    </div>
+    <div class="pull-right">
+      <input type="submit" class="btn btn-primary" value="{{ title }}" />
+    </div>
+  </form>
+  <div class="row">
+  </div>
+  <hr>
+  <div class='col-sm-5 col-sm-offset-3'>
+    {% comment %} <button class="btn btn-group-vertical mb-2">
+      <a href="{% url 'social:begin' 'facebook' %}"> Đăng nhập với Facebook
+      </a>
+    </button>
+  </div> {% endcomment %}
   {% comment %} {% if user.is_authenticated %}
   <p>Welcome, {{ user.username }} !</p>
- 
+
   {% else %} {% endcomment %}
   <button class="btn btn-group-vertical mb-2">
-  <a href="{% url 'social:begin' 'google-oauth2' %}">Đăng nhập với Google</a>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Đăng nhập với Google</a>
   </button>
   {% comment %} {% endif %} {% endcomment %}
 </div>
-<hr>
-<footer class="container-fluid bg-grey">
-        <div class="row">
-          <div class="col-lg-4">
-            <h2 class="footer-heading mb-4">Hoàng Gia Thịnh</h2>
-            <p>Tự tin mang lại cho Quý khách những chuyến đi thật hài lòng, hoàn mỹ trọn vẹn.</p>
-            <ul class="list-unstyled social">
-              <li><a href="#"><span class="icon-facebook"></span></a></li>
-              <li><a href="#"><span class="icon-instagram"></span></a></li>
-              <p>Trụ sở chính: 778 Quốc lộ 1A, Khu Phố 4, P. An Phú Đông, Quận 12, TP.HCM</p>
-              <p>(Giờ giao dịch: 8h00 – 17h00 từ thứ 2 – thứ 7)</p>
-            </ul>
-          </div>
-          <div class="col-lg-8 ml-auto">
-            <div class="row">
-              <div class="col-lg-4">
-                <h2 class="footer-heading mb-4">Truy Cập Nhanh</h2>
-                <ul class="list-unstyled">
-                  <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</a>
-                  </li>
-                  <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-info-sign"></span> Báo Giá</a></li>
-                  <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a>
-                  </li>
-                  <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-share"></span> Đăng Nhập</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-4">
-                <h2 class="footer-heading mb-4">Hỗ Trợ</h2>
-                <ul class="list-unstyled">
-                  <p>Tel: 02866.800.456</p>
-                  <p>Hotline: 0938.358.309 (Zalo, Phone)</p>
-                  <li><a href="{% url 'contact' %}"> Liên Hệ</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-4">
-                <h2 class="footer-heading mb-4">Công Ty</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#about">Giới Thiệu</a></li>
-                  <li><a href="#services">Dịch Vụ</a></li>
-                  <li><a href="#contact">Liên Hệ</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div>
-          <p class="container-fluid text-center">
-            Copyright &copy;
-            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-            with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"
-              target="_blank">Hoàng Gia Thịnh</a>
-          </p>
-        </div>
-    </div>
 {% endblock %}

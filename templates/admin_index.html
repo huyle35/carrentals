@@ -18,24 +18,31 @@
 
 <div class="collapse navbar-collapse" id="myNavbar">
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
+    <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> List Đặt Xe</a></li>
     <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
     <li><a href="{% url 'adminquote' %}"><span class="glyphicon glyphicon-tags"></span> Báo Giá</a></li>
     <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
-    <li><a href="{% url 'admincustomer' %}"><span class="glyphicon glyphicon-alert"></span> Khách Hàng</a></li>
+    <li><a href="{% url 'admincustomer' %}"><span class="glyphicon glyphicon-user"></span> Khách Hàng</a></li>
     <li><a href="{% url 'admin_blog' %}"><span class="glyphicon glyphicon-list"></span> Blog</a></li>
+    {% if user.is_superuser %}
+    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Đăng Xuất
+        {{request.user.username}}</a>
+      {% else %}
     <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+    {% endif %}
   </ul>
 </div>
-
 {% endblock %}
 {% block body %}
+<br>
+<hr>
 <div class='container table-responsive'>
   <div class="panel panel-primary">
     <!-- Default panel contents -->
     <div class="panel-heading">
-      <h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Tất Cả Các Xe</strong></h5>
+      <h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</strong></h5>
     </div>
+    {% if user.is_superuser %}
     <div class="panel-body">
       <strong class="navbar-form navbar-left" style="color: #5f5f5f;"><span class="glyphicon glyphicon-cog"></span> Tối
         đa 25 xe/trang </strong>
@@ -47,8 +54,6 @@
         </div>
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
       </form>
-
-      {% if user.is_superuser %}
       <!-- Table -->
       <div class="pull-right">
         <a href="{% url 'export_car_xls' %}"><button type="button" class="btn btn-info">In thông tin xe</button></a>
@@ -86,7 +91,6 @@
           {% endfor %}
         </tbody>
       </table>
-      {% endif %}
       <nav>
         <ul class="pager">
           <li class="previous">{% if car.has_previous %}
@@ -108,5 +112,10 @@
     </div>
   </div>
 </div>
+{% else %}
+<h2 style="color: red; text-align: center;"><strong>Bạn không có quyền truy cập vào trang Web này.</strong></h2>
+<h4 style="color: red; text-align: center;"><strong>Only for Admin #Hoàng Gia Thịnh#.</strong><br><br>
+  <a href="{% url 'login' %}"><button type="button" class="btn btn-warning">Đăng Nhập Admin</button></a></h4>
+{% endif %}
 <!--end container-->
 {% endblock %}

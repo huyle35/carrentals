@@ -5,81 +5,96 @@
 {% endblock %}
 {% block nav %}
 <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
-        <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Danh Sách Đặt Xe</a></li>
-        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
-        <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
-        <li><a href="{% url 'logout' %}x"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
-    </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Danh Sách Xe</a></li>
+    <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> List Đặt Xe</a></li>
+    <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Tin Nhắn</a></li>
+    <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Thêm Xe</a></li>
+    {% if user.is_active %}
+    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Đăng Xuất
+        {{request.user.username}}</a>
+      {% endif %}
+    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+    </li>
+  </ul>
 </div>
 {% endblock %}
 {% block body %}
 <div class='col-sm-6 col-sm-offset-3'>
-    <div class="panel-primary">
-        <div class="list-group-item active">
-            <strong><span class="glyphicon glyphicon-film"></span> Thông Tin Blog</strong>
-        </div>
-        <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-            {{form|crispy}}
-
-            <input type="submit" class='btn btn-primary' value=" Hoàn Tất">
-        </form>
+  <div class="panel-primary">
+    <div class="list-group-item active">
+      <strong><span class="glyphicon glyphicon-film"></span> Thông Tin Blog</strong>
     </div>
+    <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+      {{form|crispy}}
+
+      <input type="submit" class='btn btn-primary' value=" Hoàn Tất">
+    </form>
+  </div>
 </div>
 <hr>
 <footer class="container-fluid bg-grey">
-        <div class="row">
-          <div class="col-lg-4">
-            <h2 class="footer-heading mb-4">Hoàng Gia Thịnh</h2>
-            <p>Tự tin mang lại cho Quý khách những chuyến đi thật hài lòng, hoàn mỹ trọn vẹn.</p>
-            <ul class="list-unstyled social">
-              <li><a href="#"><span class="icon-facebook"></span></a></li>
-              <li><a href="#"><span class="icon-instagram"></span></a></li>
-              <p>Trụ sở chính: 778 Quốc lộ 1A, Khu Phố 4, P. An Phú Đông, Quận 12, TP.HCM</p>
-              <p>(Giờ giao dịch: 8h00 – 17h00 từ thứ 2 – thứ 7)</p>
-            </ul>
-          </div>
-          <div class="col-lg-8 ml-auto">
-            <div class="row">
-              <div class="col-lg-4">
-                <h2 class="footer-heading mb-4">Truy Cập Nhanh</h2>
-                <ul class="list-unstyled">
-                  <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</a>
-                  </li>
-                  <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-info-sign"></span> Báo Giá</a></li>
-                  <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a>
-                  </li>
-                  <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-share"></span> Đăng Nhập</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-4">
-                <h2 class="footer-heading mb-4">Hỗ Trợ</h2>
-                <ul class="list-unstyled">
-                  <p>Tel: 02866.800.456</p>
-                  <p>Hotline: 0938.358.309 (Zalo, Phone)</p>
-                  <li><a href="{% url 'contact' %}"> Liên Hệ</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-4">
-                <h2 class="footer-heading mb-4">Công Ty</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#about">Giới Thiệu</a></li>
-                  <li><a href="#services">Dịch Vụ</a></li>
-                  <li><a href="#contact">Liên Hệ</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div>
-          <p class="container-fluid text-center">
-            Copyright &copy;
-            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-            with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"
-              target="_blank">Hoàng Gia Thịnh</a>
-          </p>
-        </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <h2 class="footer-heading mb-4">Hoàng Gia Thịnh</h2>
+      <p>Tự tin mang lại cho Quý khách những chuyến đi thật hài lòng, hoàn mỹ trọn vẹn.</p>
+      <ul class="list-unstyled social">
+        <li><a href="#"><span class="icon-facebook"></span></a></li>
+        <li><a href="#"><span class="icon-instagram"></span></a></li>
+        <p>Trụ sở chính: 778 Quốc lộ 1A, Khu Phố 4, P. An Phú Đông, Quận 12, TP.HCM</p>
+        <p>(Giờ giao dịch: 8h00 – 17h00 từ thứ 2 – thứ 7)</p>
+      </ul>
     </div>
-{% endblock %}
+    <div class="col-lg-8 ml-auto">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2 class="footer-heading mb-4">Truy Cập Nhanh</h2>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'car_list' %}"><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</a>
+            </li>
+            <li><a href="{% url 'quote' %}"><span class="glyphicon glyphicon-info-sign"></span> Báo Giá</a></li>
+            <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Liên Hệ</a>
+            </li>
+            {% if user.is_active %}
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Đăng Xuất
+                {{request.user.username}}</a>
+              {% else %}
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Thoát</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="footer-heading mb-4">Hỗ Trợ</h2>
+          <ul class="list-unstyled">
+            <p>Tel: 02866.800.456</p>
+            <p>Hotline: 0938.358.309 (Zalo, Phone)</p>
+            <li><a href="{% url 'contact' %}"> Liên Hệ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="footer-heading mb-4">Công Ty</h2>
+          <ul class="list-unstyled">
+            <li><a href="#about">Giới Thiệu</a></li>
+            <li><a href="#services">Dịch Vụ</a></li>
+            <li><a href="#contact">Liên Hệ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <p class="container-fluid text-center">
+      Copyright &copy;
+      <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
+      made
+      with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://thuexeviphoanggia.com"
+        target="_blank">Hoàng Gia Thịnh</a>
+      <br>
+      <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
+    </p>
+  </div>
+  </div>
+  {% endblock %}

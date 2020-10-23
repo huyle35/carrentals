@@ -1,9 +1,9 @@
 from django.db import models
+
 from django.contrib.auth.models import User
 from django import forms
 from django.conf import settings
 from django.shortcuts import reverse
-
 
 # Create your models here.
 
@@ -55,9 +55,7 @@ class Quote(models.Model):
 
 
 class Customer(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="customer", null=True, blank=True
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer", null=True, blank=True)
     số_điện_thoại = models.CharField(max_length=12)
     địa_chỉ = models.TextField()
 
@@ -93,9 +91,7 @@ class Blog(models.Model):
 class Order(models.Model):
     title_xe = models.CharField(max_length=100)
     tên_xe = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="order")
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
-    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tên_khách_hàng = models.CharField(max_length=255)
     số_điện_thoại = models.CharField(max_length=12)
     email = models.EmailField()
