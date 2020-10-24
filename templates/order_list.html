@@ -37,7 +37,6 @@
       </form>
       {% endblock %}
 
-      {% if user.is_superuser %}
       <!-- Table -->
       <div class="pull-right">
         <a href="{% url 'export_order_xls' %}"><button type="button" class="btn btn-info">In thông tin thuê
@@ -76,7 +75,6 @@
         </tr>
         {% endfor %}
       </table>
-      {% endif %}
       <nav>
         <ul class="pager">
           <li class="previous">{% if order.has_previous %}

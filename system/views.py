@@ -42,7 +42,9 @@ def export_users_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = User.objects.all().values_list("username", "first_name", "last_name", "email")
+    rows = User.objects.all().values_list(
+        "username", "first_name", "last_name", "email"
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -81,7 +83,9 @@ def export_order_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = Order.objects.all().values_list("id", "tên_khách_hàng", "tên_xe", "ngày_đi", "ngày_về", "xuất_phát", "điểm_đến")
+    rows = Order.objects.all().values_list(
+        "id", "tên_khách_hàng", "tên_xe", "ngày_đi", "ngày_về", "xuất_phát", "điểm_đến"
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -169,7 +173,9 @@ def export_quote_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    rows = Quote.objects.all().values_list("id", "số_điện_thoại", "tên_xe", "ngày_đi", "ngày_về", "xuất_phát", "điểm_đến")
+    rows = Quote.objects.all().values_list(
+        "id", "số_điện_thoại", "tên_xe", "ngày_đi", "ngày_về", "xuất_phát", "điểm_đến"
+    )
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -187,7 +193,7 @@ def home(request):
         instance.save()
         return HttpResponseRedirect("/contact/")
 
-    blog = Blog.objects.order_by("date")[:4]
+    blog = Blog.objects.order_by("-date")[:4]
     context = {
         "form": form,
         "title": "Hoàng Gia Thịnh",
@@ -202,7 +208,10 @@ def car_list(request):
     query = request.GET.get("q")
     if query:
         car = car.filter(
-            Q(tên_xe__icontains=query) | Q(tên_công_ty__icontains=query) | Q(số_ghế__icontains=query) | Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -281,7 +290,11 @@ def order_list(request):
 
     query = request.GET.get("q")
     if query:
-        order = order.filter(Q(tên_xe__icontains=query) | Q(tên_khách_hàng__icontains=query) | Q(số_điện_thoại__icontains=query))
+        order = order.filter(
+            Q(tên_xe__icontains=query)
+            | Q(tên_khách_hàng__icontains=query)
+            | Q(số_điện_thoại__icontains=query)
+        )
 
     # pagination
     paginator = Paginator(order, 4)  # Show 15 contacts per page
@@ -406,7 +419,10 @@ def newcar(request):
     query = request.GET.get("q")
     if query:
         new = new.filter(
-            Q(tên_xe__icontains=query) | Q(tên_công_ty__icontains=query) | Q(số_ghế__icontains=query) | Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -443,7 +459,10 @@ def popular_car(request):
     query = request.GET.get("q")
     if query:
         new = new.filter(
-            Q(tên_xe__icontains=query) | Q(tên_công_ty__icontains=query) | Q(số_ghế__icontains=query) | Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -545,7 +564,10 @@ def admin_car_list(request):
     query = request.GET.get("q")
     if query:
         car = car.filter(
-            Q(tên_xe__icontains=query) | Q(tên_công_ty__icontains=query) | Q(số_ghế__icontains=query) | Q(giá_tham_khảo__icontains=query)
+            Q(tên_xe__icontains=query)
+            | Q(tên_công_ty__icontains=query)
+            | Q(số_ghế__icontains=query)
+            | Q(giá_tham_khảo__icontains=query)
         )
 
     # pagination
@@ -660,7 +682,12 @@ def admin_blog(request):
 
     query = request.GET.get("q")
     if query:
-        blog = blog.filter(Q(title__icontains=query) | Q(content__icontains=query) | Q(varialbes__icontains=query) | Q(date__icontains=query))
+        blog = blog.filter(
+            Q(title__icontains=query)
+            | Q(content__icontains=query)
+            | Q(varialbes__icontains=query)
+            | Q(date__icontains=query)
+        )
 
     # pagination
     paginator = Paginator(blog, 12)  # Show 15 contacts per page
@@ -686,7 +713,11 @@ def blog_list(request):
     blog = Blog.objects.all()
     query = request.GET.get("q")
     if query:
-        blog = blog.filter(Q(title__icontains=query) | Q(content__icontains=query) | Q(variables__icontains=query))
+        blog = blog.filter(
+            Q(title__icontains=query)
+            | Q(content__icontains=query)
+            | Q(variables__icontains=query)
+        )
 
     # pagination
     paginator = Paginator(blog, 12)  # Show 15 contacts per page
@@ -716,7 +747,7 @@ def blog_created(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect("/auth")
+        return HttpResponseRedirect("/admin_blog/")
     context = {"form": form, "title": "Thêm Blog Mới"}
     return render(request, "blog_create.html", context)
 
@@ -727,17 +758,23 @@ def blog_update(request, id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect("/auth")
+        return HttpResponseRedirect("/admin_blog/")
     context = {"form": form, "title": "Chỉnh Sửa Blog"}
     return render(request, "blog_create.html", context)
+
+
+# def blog_delete(request, id=None):
+#     query = get_object_or_404(Blog, id=id)
+#     query.delete()
+
+#     blog = Blog.objects.all()
+#     context = {
+#         "blog": blog,
+#     }
+#     return render(request, "admin_index.html", context)
 
 
 def blog_delete(request, id=None):
     query = get_object_or_404(Blog, id=id)
     query.delete()
-
-    blog = Blog.objects.all()
-    context = {
-        "blog": blog,
-    }
-    return render(request, "admin_index.html", context)
+    return HttpResponseRedirect("/admin_blog/")

@@ -34,7 +34,6 @@
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tìm Kiếm</button>
       </form>
 
-      {% if user.is_superuser %}
       <!-- Table -->
       <table class="table table-bordered table-striped table-hover">
         <tr>
@@ -56,12 +55,13 @@
                   onclick="return getConfirmation()"><span class="glyphicon glyphicon-pencil"></span></button></a>
               <a href="{% url 'blog_delete' ob.id %}"><button type="button" class="btn btn-danger"
                   onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
+              <a href="{% url 'newblog' %}"><button type="button" class="btn btn-info"
+                  onclick="return getConfirmation()"><span class="glyphicon glyphicon-plus"></span></button></a>
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      {% endif %}
       <nav>
         <ul class="pager">
           <li class="previous">{% if blog.has_previous %}

@@ -42,7 +42,6 @@
     <div class="panel-heading">
       <h5><strong><span class="glyphicon glyphicon-list"></span> Danh Sách Xe</strong></h5>
     </div>
-    {% if user.is_superuser %}
     <div class="panel-body">
       <strong class="navbar-form navbar-left" style="color: #5f5f5f;"><span class="glyphicon glyphicon-cog"></span> Tối
         đa 25 xe/trang </strong>
@@ -112,10 +111,5 @@
     </div>
   </div>
 </div>
-{% else %}
-<h2 style="color: red; text-align: center;"><strong>Bạn không có quyền truy cập vào trang Web này.</strong></h2>
-<h4 style="color: red; text-align: center;"><strong>Only for Admin #Hoàng Gia Thịnh#.</strong><br><br>
-  <a href="{% url 'login' %}"><button type="button" class="btn btn-warning">Đăng Nhập Admin</button></a></h4>
-{% endif %}
 <!--end container-->
 {% endblock %}
