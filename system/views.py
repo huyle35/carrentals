@@ -14,6 +14,7 @@ import xlwt
 
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from twilio.rest import Client
 
 
 def export_users_xls(request):
@@ -354,6 +355,14 @@ def order_created(request, car_id=None):
         )
         return HttpResponseRedirect(instance.get_absolute_url())
 
+    # account_sid = "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    # auth_token = "your_auth_token"
+    # client = Client(account_sid, auth_token)
+
+    # message = client.messages.create(
+    #     body="Hi there!", from_="+15017122661", to="+15558675310"
+    # )
+
     context = {"form": form, "title": "Tạo đơn đặt xe"}
     return render(request, "order_create.html", context)
 
@@ -524,6 +533,15 @@ def quote(request):
             fail_silently=True,
         )
         return render(request, "quote_success.html")
+
+    # account_sid = "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    # auth_token = "your_auth_token"
+    # client = Client(account_sid, auth_token)
+
+    # message = client.messages.create(
+    #     body="Hi there!", from_="+15017122661", to="+15558675310"
+    # )
+
     context = {
         "form": form,
         "title": "Quote",
